@@ -9,7 +9,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $fillable = ['tag', 'token'];
+    protected $fillable = ['tag', 'bnet_id'];
 
-    protected $hidden = ['token'];
+    protected $hidden = ['token', 'remember_token'];
 }
