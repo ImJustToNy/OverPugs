@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace OverSearch\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\SomeEvent' => [
-            'App\Listeners\EventListener',
+        'OverSearch\Events\SomeEvent' => [
+            'OverSearch\Listeners\EventListener',
         ],
 
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [

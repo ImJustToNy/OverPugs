@@ -8,13 +8,17 @@
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "devDependencies": {
-    "axios": "^0.15.3",
     "cross-env": "^3.2.3",
     "laravel-mix": "^0.8.3",
-    "lodash": "^4.17.4",
     "vue": "^2.1.10"
   },
   "dependencies": {
-    "vuetify": "^0.8.10"
+    "clipboard": "^1.6.1",
+    "semantic-ui": "^2.2.9",
+    "semantic-ui-css": "^2.2.9",
+    "vue-infinite-loading": "^2.0.3",
+    "vue-resource": "^1.2.1",
+    "vue-router": "^2.3.0",
+    "vuex": "^2.2.1"
   }
 }

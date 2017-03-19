@@ -4,4 +4,10 @@
 
 @section('content')
     <h1>Welcome to <b>Overwatch Lounge</b></h1>
+
+    You're
+    @unless (Auth::check())
+    not
+    @endunless
+    logged in
 @endsection

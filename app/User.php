@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace OverSearch;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,5 +11,5 @@ class User extends Authenticatable
 
     protected $fillable = ['tag', 'bnet_id'];
 
-    protected $hidden = ['token', 'remember_token'];
+    protected $hidden = ['remember_token', 'created_at', 'updated_at', 'bnet_id', 'id'];
 }
