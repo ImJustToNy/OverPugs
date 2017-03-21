@@ -1,9 +1,9 @@
 <?php
 
-namespace OverSearch;
+namespace OverwatchLounge;
 
 use Illuminate\Database\Eloquent\Model;
-use OverSearch\User;
+use OverwatchLounge\User;
 
 class Match extends Model
 {

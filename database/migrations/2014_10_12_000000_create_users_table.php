@@ -16,9 +16,11 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('tag');
+            $table->string('prefered_region')->default('US');
+            $table->string('us_profile')->nullable();
+            $table->string('eu_profile')->nullable();
+            $table->string('kr_profile')->nullable();
             $table->integer('bnet_id');
-            $table->string('avatar_url')->nullable();
-            $table->integer('rank')->default(1000);
             $table->rememberToken();
             $table->timestamps();
         });

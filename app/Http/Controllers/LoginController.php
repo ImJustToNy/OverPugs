@@ -1,14 +1,14 @@
 <?php
 
-namespace OverSearch\Http\Controllers;
+namespace OverwatchLounge\Http\Controllers;
 
 use Exception;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Laravel\Socialite\Facades\Socialite;
-use OverSearch\Http\Controllers\Controller;
-use OverSearch\User;
+use OverwatchLounge\Http\Controllers\Controller;
+use OverwatchLounge\User;
 
 class LoginController extends Controller
 {
@@ -46,22 +46,34 @@ class LoginController extends Controller
             ]
         );
 
-        $url = 'https://api.lootbox.eu/pc/eu/' . str_replace('#', '-', $user->tag) . '/profile';
+        $regions = ['us', 'eu', 'kr'];
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        foreach ($regions as $region) {
+            $url = 'https://api.lootbox.eu/pc/' . $region . '/' . str_replace('#', '-', $user->tag) . '/profile';
 
-        $result = json_decode(curl_exec($ch));
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-        if (curl_errno($ch)) {
-            throw new Exception('Can\'t retrieve informations from API');
+            $result = json_decode(curl_exec($ch));
+
+            if (curl_errno($ch)) {
+                throw new Exception('Can\'t retrieve informations from API');
+            }
+
+            curl_close($ch);
+
+            if (isset($result->error)) {
+                $profile = null;
+            } else {
+                $profile = json_encode([
+                    'rank' => intval($result->data->competitive->rank),
+                    'avatar_url' => $result->data->avatar,
+                ]);
+            }
+
+            $user->{$region . '_profile'} = $profile;
         }
-
-        curl_close($ch);
-
-        $user->rank = $result->data->competitive->rank;
-        $user->avatar_url = $result->data->avatar;
 
         $user->save();
 

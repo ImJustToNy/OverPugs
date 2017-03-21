@@ -12,7 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(OverSearch\User::class, function (Faker\Generator $faker) {
+$factory->define(OverwatchLounge\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [

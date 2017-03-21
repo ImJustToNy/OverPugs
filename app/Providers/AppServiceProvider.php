@@ -1,6 +1,6 @@
 <?php
 
-namespace OverSearch\Providers;
+namespace OverwatchLounge\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;

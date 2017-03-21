@@ -1,6 +1,6 @@
 <?php
 
-namespace OverSearch\Http\Middleware;
+namespace OverwatchLounge\Http\Middleware;
 
 use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncrypter;
 

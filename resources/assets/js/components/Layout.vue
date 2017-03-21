@@ -1,11 +1,11 @@
 <template>
-    <div class="ui container">
-        <loading></loading>
+  <div class="ui container">
+    <loading></loading>
 
-        <add></add>
+    <sidebar></sidebar>
 
-        <sidebar></sidebar>
+    <gamelist></gamelist>
 
-        <gamelist></gamelist>
-    </div>
+    <add></add>
+  </div>
 </template>

@@ -16,12 +16,13 @@ class CreateMatchesTable extends Migration
         Schema::create('matches', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
+            $table->string('region');
             $table->string('languages');
             $table->integer('howMuch');
-            $table->integer('minRu');
-            $table->integer('maxRu');
+            $table->integer('minRank');
+            $table->integer('maxRank');
             $table->string('invitationLink');
-            $table->boolean('isActive');
+            $table->dateTime('expireAt');
             $table->timestamps();
         });
     }

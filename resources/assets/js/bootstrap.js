@@ -6,4 +6,6 @@ window.VueResource = require('vue-resource');
 
 window.Clipboard = require('clipboard');
 
-require('semantic-ui-css');
+window.moment = require('moment');
+
+window.Semantic = require('semantic-ui-css');

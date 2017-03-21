@@ -1,6 +1,6 @@
 <?php
 
-namespace OverSearch\Http\Middleware;
+namespace OverwatchLounge\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;

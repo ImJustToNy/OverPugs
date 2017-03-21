@@ -1,6 +1,6 @@
 <?php
 
-namespace OverSearch\Http\Middleware;
+namespace OverwatchLounge\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\TrimStrings as BaseTrimmer;
 

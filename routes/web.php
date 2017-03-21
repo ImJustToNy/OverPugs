@@ -13,6 +13,20 @@
 
 Route::get('/', 'HomeController@home')->name('home');
 
+Route::group(['prefix' => 'api'], function () {
+    Route::group(['middleware' => 'auth'], function () {
+        Route::post('changeRegion', 'UserController@changeRegion');
+
+        Route::group(['prefix' => 'match'], function () {
+            Route::post('add', 'MatchController@addMatch');
+            Route::post('refresh', 'MatchController@refreshMatch');
+            Route::post('delete', 'MatchController@deleteMatch');
+        });
+    });
+
+    Route::get('match/list', 'MatchController@getAvailable');
+});
+
 Route::get('/login', 'LoginController@login')->name('login');
 Route::get('/logout', 'LoginController@logout')->name('logout');
 Route::get('/endpoint', 'LoginController@endpoint');

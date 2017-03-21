@@ -1,6 +1,6 @@
 <?php
 
-namespace OverSearch\Exceptions;
+namespace OverwatchLounge\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;

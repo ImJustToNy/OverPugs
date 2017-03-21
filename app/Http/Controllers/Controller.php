@@ -1,6 +1,6 @@
 <?php
 
-namespace OverSearch\Http\Controllers;
+namespace OverwatchLounge\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

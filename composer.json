@@ -20,7 +20,7 @@
             "database"
         ],
         "psr-4": {
-            "OverSearch\\": "app/"
+            "OverwatchLounge\\": "app/"
         }
     },
     "autoload-dev": {
