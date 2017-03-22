@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table class="ui table center aligned">
+    <table class="ui table center aligned" v-show="matches.length">
       <thead>
         <tr>
           <td>
@@ -84,6 +84,12 @@
         </tr>
       </tbody>
     </table>
+    <div v-show="!matches.length">
+      <h2 class="ui center aligned icon header disabled">
+        <i class="frown icon"></i>
+        No matches found
+      </h2>
+    </div>
   </div>
 </template>
 
@@ -140,6 +146,7 @@
             'color': 'yellow'
           }
         }
+        
         return types[value][property];
       }
     },

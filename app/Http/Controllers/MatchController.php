@@ -9,6 +9,7 @@ use OverwatchLounge\Events\DeleteMatch;
 use OverwatchLounge\Events\NewMatch;
 use OverwatchLounge\Events\UpdateExpire;
 use OverwatchLounge\Match;
+use OverwatchLounge\Notifications\MatchNotification;
 
 class MatchController extends Controller
 {
@@ -108,6 +109,7 @@ class MatchController extends Controller
         $userMatch = $this->userMatch();
 
         event(new NewMatch($userMatch->toArray()));
+        $request->user()->notify(new MatchNotification($userMatch));
 
         return response()->json(['match' => $userMatch]);
     }

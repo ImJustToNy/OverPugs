@@ -28,7 +28,7 @@
         <script src="{{ mix('js/app.js') }}"></script>
 
         <script>
-            try {(adsbygoogle = window.adsbygoogle || []).push({})}catch (e){}
+            (adsbygoogle = window.adsbygoogle || []).push({})
         </script>
     </body>
 </html>

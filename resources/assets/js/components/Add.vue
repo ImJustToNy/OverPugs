@@ -23,7 +23,7 @@
             </div>
             <div class="field">
               <label>Region</label>
-              <select class="ui fluid dropdown" name="region">
+              <select class="ui fluid dropdown" name="region" v-bind:value="region">
                 <option value="us"><i class="flag us"></i> North America</option>
                 <option value="eu"><i class="flag eu"></i> Europe</option>
                 <option value="kr"><i class="flag kr"></i> Korea</option>

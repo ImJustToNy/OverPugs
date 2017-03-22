@@ -1,5 +1,5 @@
 <template>
-  <div class="ui center aligned segment" v-if="production">
+  <div class="ui center aligned segment">
     <ins class="adsbygoogle"
        style="display:inline-block;width:728px;height:90px"
        data-ad-client="ca-pub-1871612708734823"
@@ -9,12 +9,6 @@
 
 <script>
   export default {
-    props: ['adslot'],
-
-    computed: {
-      production () {
-        return this.$store.state.production
-      }
-    }
+    props: ['adslot']
   }
 </script>

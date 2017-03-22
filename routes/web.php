@@ -13,6 +13,8 @@
 
 Route::get('/', 'HomeController@home')->name('home');
 
+Route::get('match/{id}', 'MatchController@getMatch')->name('getMatch');
+
 Route::group(['prefix' => 'api'], function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::post('changeRegion', 'UserController@changeRegion');

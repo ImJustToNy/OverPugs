@@ -67,7 +67,6 @@ new Vue({
       user: window.overwatchLounge.user,
       profile: ((window.overwatchLounge.user) ? window.overwatchLounge.user[window.overwatchLounge.user.prefered_region + '_profile'] : null),
       region: ((window.overwatchLounge.user) ? window.overwatchLounge.user.prefered_region : 'us'),
-      production: false,
       userMatch: null,
       matches: []
     },
