@@ -2,6 +2,11 @@
 /public/storage
 /public/hot
 /storage/*.key
+/public/js/*
+/public/css/*
+/public/fonts/*
+/public/images/*
+/public/mix-manifest.json
 /vendor
 /.idea
 Homestead.json
