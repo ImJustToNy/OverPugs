@@ -5,7 +5,6 @@
         <img class="logo" src="/images/logo.png" width="128">
         OverSearch
       </a>
-      <a href="/" class="item">Home</a>
       <div class="right green menu">
         <div class="ui dropdown item">
           <i class="flag" v-bind:class="region"></i> {{ region | toUpperCase }} <i class="dropdown icon"></i>
@@ -29,7 +28,7 @@
         <a class="item">
           <div v-if="!match" class="ui green button" v-on:click="openAddModal"><i class="icon plus"></i> Add new game</div>
           <div v-else>Expires in <b>{{ expireTimer | formatMSS }}</b>
-            <div v-if="canRefresh" class="ui mini compact blue icon button" v-on:click="refreshMatch($event)" data-tooltip="Refresh your match" data-position="bottom center">
+            <div class="ui mini compact blue icon button" v-on:click="refreshMatch($event)" data-tooltip="Refresh your match" data-position="bottom center">
               <i class="icon refresh"></i>
             </div>
             <div class="ui mini compact red icon button" v-on:click="deleteMatch($event)" data-tooltip="Delete your match" data-position="bottom center">
@@ -88,12 +87,19 @@
     data () {
       return {
         diffrence: 0,
-        canRefresh: false
+        canRefresh: false,
+        toAdd: 1
       }
     },
 
     mounted () {
+      var $this = this;
+
       $('.ui.dropdown').dropdown();
+
+      document.addEventListener("visibilitychange", function() {
+        $this.toAdd = (document.visibilityState == 'visible') ? 1 : 1.5;
+      });
 
       this.setupRefresher();
     },
@@ -102,17 +108,15 @@
       setupRefresher: function () {
         var $this = this;
 
-        setTimeout(function() {
+        setInterval(function() {
           if ($this.match) {
-            if ($this.expireTimer.seconds() < 1 && $this.expireTimer.minutes() < 1) {
+            if (($this.expireTimer.seconds() < 1 && $this.expireTimer.minutes() < 1) || $this.expireTimer.minutes() > 30) {
               $this.newMatch(null);
             } else {
-              $this.canRefresh = ($this.expireTimer.minutes() < 4);
-              $this.diffrence++;
+              $this.canRefresh = ($this.expireTimer.minutes() <= 3);
+              $this.diffrence += $this.toAdd;
             }
           }
-
-          $this.setupRefresher();
         }, 1000)
       },
 
@@ -128,8 +132,9 @@
       refreshMatch: function (event) {
         this.$http.post('match/refresh')
           .then(response => {
+            this.canRefresh = false
             this.diffrence = 0
-            this.$store.dispatch('setServerTime', response.body.serverTime);
+            this.$store.dispatch('setServerTime', response.body.serverTime)
             this.newMatch(response.body.match)
           }, response => {
             $(event.target).transition('shake');

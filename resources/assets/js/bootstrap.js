@@ -9,3 +9,7 @@ window.Clipboard = require('clipboard');
 window.moment = require('moment');
 
 window.Semantic = require('semantic-ui-css');
+
+window.Echo = require('laravel-echo');
+
+window.Pusher = require('pusher-js');

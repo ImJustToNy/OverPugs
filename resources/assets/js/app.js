@@ -1,5 +1,11 @@
 require('./bootstrap');
 
+Echo = new Echo({
+    broadcaster: 'pusher',
+    key: window.overwatchLounge.pusherKey,
+    encrypted: true
+});
+
 Vue.use(Vuex);
 Vue.use(VueResource);
 
@@ -8,6 +14,7 @@ Vue.component('loading', require('./components/loading'));
 Vue.component('add', require('./components/add'));
 Vue.component('sidebar', require('./components/sidebar'));
 Vue.component('gamelist', require('./components/gamelist'));
+Vue.component('adsense', require('./components/adSense'));
 
 Vue.http.options.root = '/api';
 Vue.http.options.headers = {
@@ -62,7 +69,8 @@ new Vue({
       profile: ((window.overwatchLounge.user) ? window.overwatchLounge.user[window.overwatchLounge.user.prefered_region + '_profile'] : null),
       region: ((window.overwatchLounge.user) ? window.overwatchLounge.user.prefered_region : 'us'),
       match: window.overwatchLounge.match,
-      serverTime: window.overwatchLounge.serverTime
+      serverTime: window.overwatchLounge.serverTime,
+      production: false
     },
 
     actions: {

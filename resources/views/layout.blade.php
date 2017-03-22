@@ -8,9 +8,12 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
         <script>
             window.overwatchLounge = {!! json_encode([
                 'csrfToken' => csrf_token(),
+                'pusherKey' => config('broadcasting.connections.pusher.key'),
                 'serverTime' => $serverTime,
                 'user' => $frontendParametrs,
                 'match' => $matchParametrs
@@ -24,5 +27,9 @@
         </div>
 
         <script src="{{ mix('js/app.js') }}"></script>
+
+        <script>
+            try {(adsbygoogle = window.adsbygoogle || []).push({})}catch (e){}
+        </script>
     </body>
 </html>
