@@ -5,6 +5,7 @@ namespace OverwatchLounge\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use OverwatchLounge\Events\DeleteMatch;
 use OverwatchLounge\Events\NewMatch;
 use OverwatchLounge\Events\UpdateExpire;
 use OverwatchLounge\Match;
@@ -32,7 +33,6 @@ class MatchController extends Controller
         return response()->json([
             'status' => 'ok',
             'match' => $userMatch,
-            'serverTime' => $this->getServerTime(),
         ]);
     }
 
@@ -42,6 +42,8 @@ class MatchController extends Controller
 
         $match->expireAt = Carbon::now()->addMinutes(-10);
         $match->save();
+
+        event(new DeleteMatch($match->id));
 
         return response()->json(['status' => 'ok']);
     }
@@ -107,16 +109,11 @@ class MatchController extends Controller
 
         event(new NewMatch($userMatch->toArray()));
 
-        return response()->json(['match' => $userMatch, 'serverTime' => $this->getServerTime()]);
+        return response()->json(['match' => $userMatch]);
     }
 
     private function userMatch()
     {
         return Auth::user()->matches()->with('user')->where('expireAt', '>', Carbon::now())->firstOrFail();
-    }
-
-    private function getServerTime()
-    {
-        return Carbon::now()->toDateTimeString();
     }
 }

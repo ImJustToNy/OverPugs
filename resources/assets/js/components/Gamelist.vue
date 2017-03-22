@@ -13,7 +13,7 @@
               <option value="not"><a class="ui mini label">Not selected</a></option>
               <option value="comp"><a class="ui mini red label">Competive</a></option>
               <option value="qp"><a class="ui mini green label">Quick Play</a></option>
-              <option value="custom"><a class="ui mini blue label">Custom Games</a></option>
+              <option value="custom"><a class="ui mini blue label">Custom games</a></option>
               <option value="brawl"><a class="ui mini yellow label">Brawl</a></option>
             </select>
           </td>
@@ -51,7 +51,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="game in games" v-show="game.region == region" v-bind:class="{ warning: game.user.tag == user.tag }" v-if="check(game)">
+        <tr v-for="game in matches" v-show="game.region == region" v-bind:class="{ warning: game.user.tag == user.tag }" v-if="check(game)">
           <td>
             <img class="ui avatar image" v-bind:src="game.user[game.region + '_profile'].avatar_url">{{ game.user.tag | friendlyTag }}
           </td>
@@ -102,14 +102,13 @@
         return this.$store.state.profile
       },
 
-      serverTime () {
-        return this.$store.state.serverTime
+      matches () {
+        return this.$store.state.matches
       }
     },
 
     data: function () {
       return {
-        games: [],
         filter: {
           nickname: '',
           type: 'not',
@@ -153,32 +152,42 @@
       setupMatchRefresher: function () {
         Echo.channel('matches')
           .listen('.OverwatchLounge.Events.NewMatch', (e) => {
-            this.games.push(e.match);
+            var matches = this.matches;
+            matches.push(e.match);
+            this.$store.dispatch('updateMatches', matches);
           })
           .listen('.OverwatchLounge.Events.UpdateExpire', (e) => {
-            var $this = this;
+            var matches = this.matches;
 
-            $this.games.forEach(function (item, key) {
+            matches.forEach(function (item, key) {
               if (item.id == e.match.id) {
-                $this.games[key] = e.match;
+                matches[key] = e.match;
               }
             })
+
+            this.$store.dispatch('updateMatches', matches);
+          })
+          .listen('.OverwatchLounge.Events.DeleteMatch', (e) => {
+            var matches = this.matches;
+
+            matches.forEach(function (item, key) {
+              if (item.id == e.id) {
+                matches.splice(matches.indexOf(key), 1);
+              }
+            })
+
+            this.$store.dispatch('updateMatches', matches);
           })
       },
 
       getMatches: function () {
         this.$http.get('match/list').then(response => {
-          this.games = response.body;
+          this.$store.dispatch('switchLoading', false)
+          this.$store.dispatch('updateMatches', response.body);
         });
-
-        this.$store.dispatch('switchLoading', false)
       },
 
       check: function (game) {
-        if (moment(moment(game.expireAt).diff(moment(this.serverTime))).seconds() < 1) {
-          return false;
-        }
-
         if (this.filter.nickname != '' && !game.user.tag.toLowerCase().includes(this.filter.nickname.toLowerCase())) {
           return false;
         }

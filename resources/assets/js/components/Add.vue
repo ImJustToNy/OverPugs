@@ -145,9 +145,6 @@
             .then(response => {
               $this.formSubmitting = false
               $this.error = false
-              
-              $this.$store.dispatch('newMatch', response.body.match)
-              $this.$store.dispatch('setServerTime', response.body.serverTime)
 
               $('.ui.modal').modal('hide')
             }, response => {

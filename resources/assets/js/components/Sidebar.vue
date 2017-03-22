@@ -26,9 +26,9 @@
           <img v-bind:src="profile.rank | imageRank" alt="User's rank"> {{ profile.rank }}
         </div>
         <a class="item">
-          <div v-if="!match" class="ui green button" v-on:click="openAddModal"><i class="icon plus"></i> Add new game</div>
-          <div v-else>Expires in <b>{{ expireTimer | formatMSS }}</b>
-            <div class="ui mini compact blue icon button" v-on:click="refreshMatch($event)" data-tooltip="Refresh your match" data-position="bottom center">
+          <div v-if="!userMatch" class="ui green button" v-on:click="openAddModal"><i class="icon plus"></i> Add new game</div>
+          <div v-else>Expires in <b>{{ diff }}</b>
+            <div class="ui mini compact blue icon button" v-on:click="refreshMatch($event)" v-if="diff <= 180" data-tooltip="Refresh your match" data-position="bottom center">
               <i class="icon refresh"></i>
             </div>
             <div class="ui mini compact red icon button" v-on:click="deleteMatch($event)" data-tooltip="Delete your match" data-position="bottom center">
@@ -52,54 +52,31 @@
         return this.$store.state.region
       },
 
-      match () {
-        return this.$store.state.match
+      userMatch () {
+        return this.$store.state.userMatch
       },
 
       profile () {
         return this.$store.state.profile
-      },
-
-      serverTime () {
-        return this.$store.state.serverTime
-      },
-
-      expireTimer () {
-        var $this = this;
-        return moment(moment(this.match.expireAt).diff(moment(this.serverTime))).add(-this.diffrence, 'seconds');
-      }
-    },
-
-    watch: {
-      match: function (newMatch) {
-        if (!newMatch) {
-          this.diffrence = 0;
-        }
       }
     },
 
     filters: {
-      formatMSS: function (value) {
-        return moment(value).format('m:ss');
+      formatSeconds: function (value) {
+        var time = moment.duration(value, 'seconds');
+        return time.minutes() + ':' + time.seconds();
       }
     },
 
     data () {
       return {
-        diffrence: 0,
-        canRefresh: false,
-        toAdd: 1
+        diff: 0,
+        canRefresh: false
       }
     },
 
     mounted () {
-      var $this = this;
-
       $('.ui.dropdown').dropdown();
-
-      document.addEventListener("visibilitychange", function() {
-        $this.toAdd = (document.visibilityState == 'visible') ? 1 : 1.5;
-      });
 
       this.setupRefresher();
     },
@@ -109,40 +86,28 @@
         var $this = this;
 
         setInterval(function() {
-          if ($this.match) {
-            if (($this.expireTimer.seconds() < 1 && $this.expireTimer.minutes() < 1) || $this.expireTimer.minutes() > 30) {
-              $this.newMatch(null);
-            } else {
-              $this.canRefresh = ($this.expireTimer.minutes() <= 3);
-              $this.diffrence += $this.toAdd;
-            }
+          $this.$store.dispatch('updateMatches');
+
+          if ($this.userMatch) {
+            $this.diff = moment.utc($this.userMatch.expireAt).diff(moment(), 'seconds');
           }
-        }, 1000)
+        }, 1000);
       },
 
       deleteMatch: function (event) {
         this.$http.post('match/delete')
-          .then(response => {
-            this.newMatch(null)
-          }, response => {
+          .then(response => {}, response => {
             $(event.target).transition('shake');
           })
       },
 
       refreshMatch: function (event) {
+        this.canRefresh = false;
+
         this.$http.post('match/refresh')
-          .then(response => {
-            this.canRefresh = false
-            this.diffrence = 0
-            this.$store.dispatch('setServerTime', response.body.serverTime)
-            this.newMatch(response.body.match)
-          }, response => {
+          .then(response => {}, response => {
             $(event.target).transition('shake');
           })
-      },
-
-      newMatch: function (match) {
-        this.$store.dispatch('newMatch', match)
       },
 
       switchRegion: function (region) {

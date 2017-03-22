@@ -1,9 +1,8 @@
 require('./bootstrap');
 
 Echo = new Echo({
-    broadcaster: 'pusher',
-    key: window.overwatchLounge.pusherKey,
-    encrypted: true
+  broadcaster: 'pusher',
+  key: window.overwatchLounge.pusherKey
 });
 
 Vue.use(Vuex);
@@ -68,9 +67,9 @@ new Vue({
       user: window.overwatchLounge.user,
       profile: ((window.overwatchLounge.user) ? window.overwatchLounge.user[window.overwatchLounge.user.prefered_region + '_profile'] : null),
       region: ((window.overwatchLounge.user) ? window.overwatchLounge.user.prefered_region : 'us'),
-      match: window.overwatchLounge.match,
-      serverTime: window.overwatchLounge.serverTime,
-      production: false
+      production: false,
+      userMatch: null,
+      matches: []
     },
 
     actions: {
@@ -82,22 +81,14 @@ new Vue({
         commit('CHANGE_REGION', condition)
       },
 
-      newMatch({ commit }, condition) {
-        commit('NEW_MATCH', condition)
-      },
-
-      setServerTime({ commit }, condition) {
-        commit('SET_SERVERTIME', condition)
+      updateMatches({ commit }, condition = null) {
+        commit('UPDATE_MATCHES', condition)
       }
     },
 
     mutations: {
       SWITCH_LOADING (state, condition) {
         state.loading = condition
-      },
-
-      NEW_MATCH (state, condition) {
-        state.match = condition;
       },
 
       CHANGE_REGION (state, condition) {
@@ -112,8 +103,22 @@ new Vue({
         }
       },
 
-      SET_SERVERTIME (state, condition) {
-        state.serverTime = condition;
+      UPDATE_MATCHES (state, condition) {
+        if (condition == null) {
+          condition = state.matches;
+        }
+        
+        state.userMatch = null;
+
+        condition.forEach(function (i, k) {
+          if (moment.utc(i.expireAt).diff(moment(), 'seconds') < 1) {
+            condition.splice(condition.indexOf(k), 1);
+          } else if (state.user && state.user.tag == i.user.tag) {
+            state.userMatch = i;
+          }          
+        })
+
+        state.matches = condition;
       }
     }
   })

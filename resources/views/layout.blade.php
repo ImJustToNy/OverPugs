@@ -14,7 +14,6 @@
             window.overwatchLounge = {!! json_encode([
                 'csrfToken' => csrf_token(),
                 'pusherKey' => config('broadcasting.connections.pusher.key'),
-                'serverTime' => $serverTime,
                 'user' => $frontendParametrs,
                 'match' => $matchParametrs
             ]) !!}

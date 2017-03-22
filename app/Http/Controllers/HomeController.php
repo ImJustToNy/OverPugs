@@ -17,10 +17,7 @@ class HomeController extends Controller
             $matchParametrs = null;
         }
 
-        $serverTime = Carbon::now()->toDateTimeString();
-
         return view('layout', [
-            'serverTime' => $serverTime,
             'frontendParametrs' => $frontendParametrs,
             'matchParametrs' => $matchParametrs,
         ]);
