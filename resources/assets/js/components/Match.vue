@@ -2,11 +2,11 @@
   <div class="ui modal askedMatch">
     <i class="close icon"></i>
     <div class="header">
-      Match details #{{ match.id }}
+      Match details
     </div>
     <div class="content">
       <div class="description">  
-        <table class="ui table center aligned">
+        <table class="ui table center aligned" v-if="match">
           <tbody>
             <tr>
               <td>
@@ -42,7 +42,7 @@
           </tbody>
         </table>
 
-        <h2 class="ui center aligned icon header disabled" v-if="false">
+        <h2 class="ui center aligned icon header disabled" v-else>
           <i class="clock icon"></i>
           {{ error }}
         </h2>
