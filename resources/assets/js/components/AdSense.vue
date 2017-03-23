@@ -13,7 +13,7 @@
 
     data () {
       return {
-        adsEnabled: true,
+        adsEnabled: false,
       }
     }
   }
