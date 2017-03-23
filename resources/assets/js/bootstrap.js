@@ -1,3 +1,7 @@
+console.log(' ██╗ ██╗ ██████╗ ██╗   ██╗████████╗ ██████╗ ███╗   ██╗██╗   ██╗\n████████╗██╔══██╗╚██╗ ██╔╝╚══██╔══╝██╔═══██╗████╗  ██║╚██╗ ██╔╝\n╚██╔═██╔╝██████╔╝ ╚████╔╝    ██║   ██║   ██║██╔██╗ ██║ ╚████╔╝ \n████████╗██╔══██╗  ╚██╔╝     ██║   ██║   ██║██║╚██╗██║  ╚██╔╝  \n╚██╔═██╔╝██████╔╝   ██║      ██║   ╚██████╔╝██║ ╚████║   ██║   \n ╚═╝ ╚═╝ ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ');
+console.log('Hello, this app is made by Antoni \'ToNy\' Siek.')
+console.log('If you want to work with me, please reach me at imtony@protonmail.com')
+
 window.Vue = require('vue');
 
 window.Vuex = require('vuex');
