@@ -15,7 +15,6 @@
                 'csrfToken' => csrf_token(),
                 'pusherKey' => config('broadcasting.connections.pusher.key'),
                 'user' => $user,
-                'match' => $matchParametrs,
                 'askedMatch' => session('match')
             ]) !!}
         </script>
