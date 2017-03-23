@@ -178,7 +178,7 @@ return [
         OverwatchLounge\Providers\RouteServiceProvider::class,
 
         /*
-         * Vendor packages
+         * Vendor Service Providers...
          */
         \SocialiteProviders\Manager\ServiceProvider::class,
     ],
