@@ -8,13 +8,13 @@ Echo = new Echo({
 Vue.use(Vuex);
 Vue.use(VueResource);
 
-Vue.component('layout', require('./components/layout'));
-Vue.component('loading', require('./components/loading'));
-Vue.component('add', require('./components/add'));
-Vue.component('sidebar', require('./components/sidebar'));
-Vue.component('gamelist', require('./components/gamelist'));
-Vue.component('match', require('./components/match'));
-Vue.component('adsense', require('./components/adSense'));
+Vue.component('layout', require('./components/Layout'));
+Vue.component('loading', require('./components/Loading'));
+Vue.component('add', require('./components/Add'));
+Vue.component('sidebar', require('./components/Sidebar'));
+Vue.component('gamelist', require('./components/Gamelist'));
+Vue.component('match', require('./components/Match'));
+Vue.component('adsense', require('./components/AdSense'));
 
 Vue.http.options.root = '/api';
 Vue.http.options.headers = {
