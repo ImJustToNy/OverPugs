@@ -2,7 +2,7 @@
   <div class="ui modal askedMatch">
     <i class="close icon"></i>
     <div class="header">
-      Match details
+      Match details #{{ match.id }}
     </div>
     <div class="image content">
       <img class="image" width="128" height="128" v-bind:src="match.user[match.region + '_profile'].avatar_url" v-if="match">
