@@ -75,7 +75,7 @@
     },
 
     mounted () {
-      if (this.match != false) {
+      if (this.match != false || this.error != false) {
         $('.askedMatch').modal('show');
       }
     }
