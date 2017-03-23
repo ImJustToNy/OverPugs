@@ -114,6 +114,17 @@ class MatchController extends Controller
         return response()->json(['match' => $userMatch]);
     }
 
+    public function getMatch(Request $request, $id)
+    {
+        $match = Match::where('expireAt', '>', Carbon::now())->with('user')->find($id);
+
+        if (is_null($match)) {
+            return redirect()->route('home')->with('match', '0');
+        }
+
+        return redirect()->route('home')->with('match', $match);
+    }
+
     private function userMatch()
     {
         return Auth::user()->matches()->with('user')->where('expireAt', '>', Carbon::now())->firstOrFail();

@@ -126,31 +126,6 @@
       }
     },
 
-    filters: {
-      badge: function (value, property) {
-        var types = {
-          'qp': {
-            'name': 'Quick Play',
-            'color': 'blue'
-          },
-          'comp': {
-            'name': 'Competitive',
-            'color': 'red'
-          },
-          'custom': {
-            'name': 'Custom games',
-            'color': 'green'
-          },
-          'brawl': {
-            'name': 'Brawl',
-            'color': 'yellow'
-          }
-        }
-        
-        return types[value][property];
-      }
-    },
-
     methods: {
       openDiscord: function (game) {
         open(game.invitationLink, "", "width=450,height=500")

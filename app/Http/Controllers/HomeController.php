@@ -10,15 +10,15 @@ class HomeController extends Controller
     public function home()
     {
         if (Auth::check()) {
-            $frontendParametrs = Auth::user()->select(['tag', 'prefered_region', 'us_profile', 'eu_profile', 'kr_profile'])->first();
+            $user = Auth::user()->select(['tag', 'prefered_region', 'us_profile', 'eu_profile', 'kr_profile'])->first();
             $matchParametrs = Auth::user()->matches()->where('expireAt', '>', Carbon::now())->first();
         } else {
-            $frontendParametrs = null;
+            $user = null;
             $matchParametrs = null;
         }
 
         return view('layout', [
-            'frontendParametrs' => $frontendParametrs,
+            'user' => $user,
             'matchParametrs' => $matchParametrs,
         ]);
     }

@@ -8,6 +8,8 @@
 
     <gamelist></gamelist>
 
+    <match></match>
+
     <add></add>
   </div>
 </template>

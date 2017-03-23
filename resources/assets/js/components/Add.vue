@@ -1,5 +1,5 @@
 <template>
-  <div class="ui modal" v-if="user && profile">
+  <div class="ui modal addModal" v-if="user && profile">
     <i class="close icon"></i>
     <div class="header">
       Create new match
@@ -103,7 +103,7 @@
 
       minRank () {
         if (this.user) {
-          var rank = this.profile.rank - 1000;
+          var rank = this.profile.rank - 500;
 
           if (rank < 1) {
             return 1;
@@ -117,7 +117,7 @@
 
       maxRank () {
         if (this.user) {
-          var rank = this.profile.rank + 1000;
+          var rank = this.profile.rank + 500;
 
           if (rank > 5000) {
             rank -= rank - 5000;
@@ -146,7 +146,7 @@
               $this.formSubmitting = false
               $this.error = false
 
-              $('.ui.modal').modal('hide')
+              $('.addModal').modal('hide')
             }, response => {
               $this.formSubmitting = false
               if (response.body.error) {

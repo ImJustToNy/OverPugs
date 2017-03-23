@@ -74,8 +74,8 @@ class MatchNotification extends Notification
                 ];
 
                 if ($match->type == 'comp') {
-                    $fields['Min Rank'] = $this->getRankIcon($match->minRank) . ' ' . $match->minRank;
-                    $fields['Max Rank'] = $this->getRankIcon($match->maxRank) . ' ' . $match->maxRank;
+                    $fields['Min Rank'] = /*$this->getRankIcon($match->minRank) . ' ' .*/$match->minRank;
+                    $fields['Max Rank'] = /*$this->getRankIcon($match->maxRank) . ' ' .*/$match->maxRank;
                 } else {
                     $fields['Description'] = $match->description;
                 }

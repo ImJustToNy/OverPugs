@@ -1,10 +1,13 @@
 <template>
   <div class="ui fixed stackable menu">
     <div class="ui container">
-      <a href="#" class="header item">
+      <div class="header item">
         <img class="logo" src="/images/logo.png" width="128">
         OverSearch
-      </a>
+        <div class="ui left pointing red basic label">
+          Made with <i class="icon red heart nomargin"></i> by <a href="mailto:imtony@protonmail.com">ToNy</a>
+        </div>
+      </div>
       <div class="right green menu">
         <div class="ui dropdown item">
           <i class="flag" v-bind:class="region"></i> {{ region | toUpperCase }} <i class="dropdown icon"></i>
@@ -118,7 +121,7 @@
         if (!this.user) {
           window.location.href = '/login';
         } else {
-          $('.ui.modal').modal({
+          $('.addModal').modal({
             onApprove: function () {
               return false;
             },

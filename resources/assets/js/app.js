@@ -13,6 +13,7 @@ Vue.component('loading', require('./components/loading'));
 Vue.component('add', require('./components/add'));
 Vue.component('sidebar', require('./components/sidebar'));
 Vue.component('gamelist', require('./components/gamelist'));
+Vue.component('match', require('./components/match'));
 Vue.component('adsense', require('./components/adSense'));
 
 Vue.http.options.root = '/api';
@@ -57,6 +58,29 @@ Vue.filter('friendlyTag', function (value) {
 
 Vue.filter('pluralize', function (value, word) {
   return value + ' ' + word + ((value > 1) ? 's' : '');
+})
+
+Vue.filter('badge', function (value, property) {
+  var types = {
+    'qp': {
+      'name': 'Quick Play',
+      'color': 'blue'
+    },
+    'comp': {
+      'name': 'Competitive',
+      'color': 'red'
+    },
+    'custom': {
+      'name': 'Custom games',
+      'color': 'green'
+    },
+    'brawl': {
+      'name': 'Brawl',
+      'color': 'yellow'
+    }
+  }
+  
+  return types[value][property];
 })
 
 new Vue({
