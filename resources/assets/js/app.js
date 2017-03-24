@@ -21,12 +21,6 @@ Vue.component('gamelist', require('./components/Gamelist'));
 Vue.component('match', require('./components/Match'));
 Vue.component('adsense', require('./components/AdSense'));
 
-Vue.http.options.root = '/api';
-Vue.http.options.headers = {
-  'X-CSRF-TOKEN': window.overwatchLounge.csrfToken,
-  'X-Requested-With': 'XMLHttpRequest'
-}
-
 Vue.filter('imageRank', function (value) {
   var imageId;
 
@@ -87,6 +81,12 @@ Vue.filter('badge', function (value, property) {
   
   return types[value][property];
 })
+
+Vue.http.options.root = '/api';
+Vue.http.options.headers = {
+  'X-CSRF-TOKEN': window.overwatchLounge.csrfToken,
+  'X-Requested-With': 'XMLHttpRequest'
+}
 
 new Vue({
   el: '#app',
