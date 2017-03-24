@@ -39,9 +39,6 @@ class LoginController extends Controller
 
         $user = User::firstOrCreate(
             [
-                'bnet_id' => $login->id,
-            ],
-            [
                 'tag' => $login->nickname,
             ]
         );

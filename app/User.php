@@ -10,9 +10,9 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $fillable = ['tag', 'bnet_id'];
+    protected $fillable = ['tag'];
 
-    protected $hidden = ['remember_token', 'bnet_id'];
+    protected $hidden = ['remember_token'];
 
     public function matches()
     {
