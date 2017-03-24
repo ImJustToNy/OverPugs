@@ -17,3 +17,7 @@ window.Semantic = require('semantic-ui-css');
 window.Echo = require('laravel-echo');
 
 window.Pusher = require('pusher-js');
+
+window.Raven = require('raven-js');
+
+window.RavenVue = require('raven-js/plugins/vue');

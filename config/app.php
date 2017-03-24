@@ -180,7 +180,8 @@ return [
         /*
          * Vendor Service Providers...
          */
-        \SocialiteProviders\Manager\ServiceProvider::class,
+        SocialiteProviders\Manager\ServiceProvider::class,
+        Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
     ],
 
     /*
@@ -230,6 +231,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
     ],
 
 ];
