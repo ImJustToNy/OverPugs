@@ -136,6 +136,7 @@
           .listen('.OverwatchLounge.Events.NewMatch', (e) => {
             var matches = this.matches;
             matches.push(e.match);
+            
             this.$store.dispatch('updateMatches', matches);
           })
           .listen('.OverwatchLounge.Events.UpdateExpire', (e) => {
