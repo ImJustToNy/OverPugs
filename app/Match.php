@@ -16,13 +16,4 @@ class Match extends Model
     {
         return explode(',', $value);
     }
-
-    public function getAvatarUrlAttribute($value)
-    {
-        if (is_null($value)) {
-            return 'https://hydra-media.cursecdn.com/overwatch.gamepedia.com/2/2a/PI_Overwatch_Logo_White.png';
-        } else {
-            return $value;
-        }
-    }
 }

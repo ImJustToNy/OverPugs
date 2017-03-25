@@ -29,6 +29,6 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('match/list', 'MatchController@getAvailable');
 });
 
-Route::get('/login', 'LoginController@login')->name('login');
-Route::get('/logout', 'LoginController@logout')->name('logout');
-Route::get('/endpoint', 'LoginController@endpoint');
+Route::get('login', 'LoginController@login')->name('login');
+Route::get('logout', 'LoginController@logout')->name('logout');
+Route::get('endpoint', 'LoginController@endpoint');
