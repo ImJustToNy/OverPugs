@@ -67,6 +67,7 @@ class MatchNotification extends Notification
                 }
 
                 $fields = [
+                    'Region' => strtoupper($match->region),
                     'Type' => $games[$this->match->type],
                     'Languages' => $languages,
                     'How Many' => $howMuch,
