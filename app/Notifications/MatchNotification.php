@@ -47,7 +47,6 @@ class MatchNotification extends Notification
         return (new SlackMessage)
             ->success()
             ->from(substr($match->user->tag, 0, strpos($match->user->tag, "#")))
-            ->to('#us-lfg')
             ->image($match->user->{$match->region . '_profile'}->avatar_url)
             ->attachment(function ($attachment) use ($match) {
                 $howMuch = $match->howMuch;
@@ -57,17 +56,19 @@ class MatchNotification extends Notification
                     $howMuch .= ' :person_frowning:';
                 }
 
-                $games = ['qp' => 'Quick Play',
+                $games = [
+                    'qp' => 'Quick Play',
                     'comp' => 'Competitive',
                     'custom' => 'Custom games',
-                    'brawl' => 'Brawl'];
+                    'brawl' => 'Brawl',
+                ];
 
                 foreach ($match->languages as $language) {
                     $languages .= ' :flag_' . $language . ':';
                 }
 
                 $fields = [
-                    'Region' => strtoupper($match->region),
+                    'Region' => ':flag_' . $match->region . ': ' . strtoupper($match->region),
                     'Type' => $games[$this->match->type],
                     'Languages' => $languages,
                     'How Many' => $howMuch,
