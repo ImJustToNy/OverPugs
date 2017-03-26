@@ -10,6 +10,7 @@ use OverwatchLounge\Events\NewMatch;
 use OverwatchLounge\Events\UpdateExpire;
 use OverwatchLounge\Match;
 use OverwatchLounge\Notifications\MatchNotification;
+use OverwatchLounge\User;
 
 class MatchController extends Controller
 {
@@ -127,6 +128,6 @@ class MatchController extends Controller
 
     private function userMatch()
     {
-        return Auth::user()->matches()->with('user')->where('expireAt', '>', Carbon::now())->firstOrFail();
+        return User::find(Auth::id())->matches()->with('user')->where('expireAt', '>', Carbon::now())->firstOrFail();
     }
 }
