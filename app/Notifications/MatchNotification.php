@@ -82,7 +82,9 @@ class MatchNotification extends Notification
                     $fields['Description'] = $match->description;
                 }
 
-                $fields['Invitation'] = $match->invitationLink;
+                if ($match->invitationLink) {
+                    $fields['Invitation'] = $match->invitationLink;
+                }
 
                 $attachment->title('Click for more details', route('getMatch', $match->id))->fields($fields);
             });
