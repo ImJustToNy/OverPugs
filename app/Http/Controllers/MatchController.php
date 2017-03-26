@@ -61,7 +61,7 @@ class MatchController extends Controller
             'type' => ['required', 'in:comp,qp,custom,brawl'],
         ]);
 
-        if (isset($request->invitationLink) && !preg_match('/https?:\/\/discord\.gg\/[a-z0-9]{6,}/i', $request->invitationLink)) {
+        if (isset($request->invitationLink) && !preg_match('/https?:\/\/discord\.gg\/[a-z0-9]{3,}/i', $request->invitationLink)) {
             return response()->json(['error' => 'This is not correct discord invitation link'], 400);
         }
 
