@@ -74,9 +74,11 @@ class LoginController extends Controller
 
         $user->save();
 
-        dd($user);
+        dump($user);
 
         Auth::login($user, true);
+
+        dd(Auth::user());
 
         return redirect()->route('home');
     }
