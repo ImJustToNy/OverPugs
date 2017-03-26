@@ -74,6 +74,8 @@ class LoginController extends Controller
 
         $user->save();
 
+        dd($user);
+
         Auth::login($user, true);
 
         return redirect()->route('home');
