@@ -37,11 +37,15 @@ class LoginController extends Controller
     {
         $login = Socialite::driver('battlenet')->stateless()->user();
 
+        dump($login);
+
         $user = User::firstOrCreate(
             [
                 'tag' => $login->nickname,
             ]
         );
+
+        dd($user);
 
         $regions = ['us', 'eu', 'kr'];
 
