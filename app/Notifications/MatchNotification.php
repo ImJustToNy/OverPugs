@@ -72,7 +72,6 @@ class MatchNotification extends Notification
                     'Type' => $games[$this->match->type],
                     'Languages' => $languages,
                     'How Many' => $howMuch,
-                    'With voice' => ($match->invitationLink) ? ':thumbsup:' : ':thumbsdown:',
                 ];
 
                 if ($match->type == 'comp') {

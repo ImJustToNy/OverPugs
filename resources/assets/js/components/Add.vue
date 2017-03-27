@@ -19,7 +19,7 @@
           <div class="two fields">
             <div class="field">
               <label>Discord Invitation Link</label>
-              <input type="text" name="invitationLink" autocomplete="off" placeholder="Leave blank if you want to play without discord" value="https://discord.gg/uniqueID">
+              <input type="text" name="invitationLink" autocomplete="off" placeholder="Leave blank if you want to play without discord">
             </div>
             <div class="field">
               <label>Region</label>
