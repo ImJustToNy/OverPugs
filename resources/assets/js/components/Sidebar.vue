@@ -31,7 +31,7 @@
         <div class="item">
           <div v-if="!user" class="ui blue button" v-on:click="redirectToLogin"><i class="icon sign in"></i> Login</div>
           <div v-if="!userMatch && user" class="ui green button" v-on:click="openAddModal"><i class="icon plus"></i> Add new game</div>
-          <div v-else>Expires in <b>{{ diff }}</b>
+          <div v-if="user && userMatch">Expires in <b>{{ diff }}</b>
             <div class="ui mini compact blue icon button" v-on:click="refreshMatch($event)" v-if="diff <= 180" data-tooltip="Refresh your match" data-position="bottom center">
               <i class="icon refresh"></i>
             </div>
