@@ -1,6 +1,6 @@
 <?php
 
-namespace OverwatchLounge\Http\Controllers;
+namespace OverPugs\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

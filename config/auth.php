@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => OverwatchLounge\User::class,
+            'model' => OverPugs\User::class,
         ],
 
         // 'users' => [

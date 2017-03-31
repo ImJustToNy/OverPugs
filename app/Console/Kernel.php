@@ -1,6 +1,6 @@
 <?php
 
-namespace OverwatchLounge\Console;
+namespace OverPugs\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;

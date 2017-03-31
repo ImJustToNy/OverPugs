@@ -1,10 +1,10 @@
 <?php
 
-namespace OverwatchLounge\Http\Controllers;
+namespace OverPugs\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use OverwatchLounge\User;
+use OverPugs\User;
 
 class UserController extends Controller
 {

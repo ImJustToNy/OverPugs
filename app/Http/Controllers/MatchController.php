@@ -1,16 +1,16 @@
 <?php
 
-namespace OverwatchLounge\Http\Controllers;
+namespace OverPugs\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use OverwatchLounge\Events\DeleteMatch;
-use OverwatchLounge\Events\NewMatch;
-use OverwatchLounge\Events\UpdateExpire;
-use OverwatchLounge\Match;
-use OverwatchLounge\Notifications\MatchNotification;
-use OverwatchLounge\User;
+use OverPugs\Events\DeleteMatch;
+use OverPugs\Events\NewMatch;
+use OverPugs\Events\UpdateExpire;
+use OverPugs\Match;
+use OverPugs\Notifications\MatchNotification;
+use OverPugs\User;
 
 class MatchController extends Controller
 {

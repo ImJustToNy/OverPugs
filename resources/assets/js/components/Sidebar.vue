@@ -3,7 +3,7 @@
     <div class="ui container">
       <div class="header item">
         <img class="logo" src="/images/logo.png" width="128">
-        OverSearch
+        OverPugs
         <div class="ui left pointing red basic label">
           Made with <i class="icon red heart nomargin"></i> by <a href="mailto:imtony@protonmail.com">ToNy</a>
         </div>
@@ -28,8 +28,9 @@
         <div class="item" v-if="profile">
           <img v-bind:src="profile.rank | imageRank" alt="User's rank"> {{ profile.rank }}
         </div>
-        <a class="item">
-          <div v-if="!userMatch" class="ui green button" v-on:click="openAddModal"><i class="icon plus"></i> Add new game</div>
+        <div class="item">
+          <div v-if="!user" class="ui blue button" v-on:click="redirectToLogin"><i class="icon sign in"></i> Login</div>
+          <div v-if="!userMatch && user" class="ui green button" v-on:click="openAddModal"><i class="icon plus"></i> Add new game</div>
           <div v-else>Expires in <b>{{ diff }}</b>
             <div class="ui mini compact blue icon button" v-on:click="refreshMatch($event)" v-if="diff <= 180" data-tooltip="Refresh your match" data-position="bottom center">
               <i class="icon refresh"></i>
@@ -38,7 +39,7 @@
               <i class="icon delete"></i>
             </div>
           </div>
-        </a>
+        </div>
       </div>
     </div>
   </div>
@@ -118,17 +119,17 @@
       },
 
       openAddModal: function () {
-        if (!this.user) {
-          window.location.href = '/login';
-        } else {
-          $('.addModal').modal({
-            onApprove: function () {
-              return false;
-            },
-            
-            closable: false
-          }).modal('show');
-        }
+        $('.addModal').modal({
+          onApprove: function () {
+            return false;
+          },
+          
+          closable: false
+        }).modal('show');
+      },
+
+      redirectToLogin: function () {
+        window.location.href = '/login';
       }
     }
   }

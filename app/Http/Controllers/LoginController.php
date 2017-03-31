@@ -1,6 +1,6 @@
 <?php
 
-namespace OverwatchLounge\Http\Controllers;
+namespace OverPugs\Http\Controllers;
 
 use Exception;
 use GuzzleHttp\Exception\ClientException;
@@ -8,8 +8,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Laravel\Socialite\Facades\Socialite;
-use OverwatchLounge\Http\Controllers\Controller;
-use OverwatchLounge\User;
+use OverPugs\Http\Controllers\Controller;
+use OverPugs\User;
 
 class LoginController extends Controller
 {

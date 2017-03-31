@@ -1,10 +1,10 @@
 <?php
 
-namespace OverwatchLounge;
+namespace OverPugs;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use OverwatchLounge\Match;
+use OverPugs\Match;
 
 class User extends Authenticatable
 {

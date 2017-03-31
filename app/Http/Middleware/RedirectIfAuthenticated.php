@@ -1,6 +1,6 @@
 <?php
 
-namespace OverwatchLounge\Http\Middleware;
+namespace OverPugs\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;

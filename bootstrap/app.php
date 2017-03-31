@@ -28,17 +28,17 @@ $app = new Illuminate\Foundation\Application(
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    OverwatchLounge\Http\Kernel::class
+    OverPugs\Http\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    OverwatchLounge\Console\Kernel::class
+    OverPugs\Console\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    OverwatchLounge\Exceptions\Handler::class
+    OverPugs\Exceptions\Handler::class
 );
 
 /*

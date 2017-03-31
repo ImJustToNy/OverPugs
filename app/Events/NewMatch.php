@@ -1,6 +1,6 @@
 <?php
 
-namespace OverwatchLounge\Events;
+namespace OverPugs\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;

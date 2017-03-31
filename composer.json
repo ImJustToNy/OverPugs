@@ -24,7 +24,7 @@
             "database"
         ],
         "psr-4": {
-            "OverwatchLounge\\": "app/"
+            "OverPugs\\": "app/"
         }
     },
     "autoload-dev": {

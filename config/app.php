@@ -171,11 +171,11 @@ return [
         /*
          * Application Service Providers...
          */
-        OverwatchLounge\Providers\AppServiceProvider::class,
-        OverwatchLounge\Providers\AuthServiceProvider::class,
-        OverwatchLounge\Providers\BroadcastServiceProvider::class,
-        OverwatchLounge\Providers\EventServiceProvider::class,
-        OverwatchLounge\Providers\RouteServiceProvider::class,
+        OverPugs\Providers\AppServiceProvider::class,
+        OverPugs\Providers\AuthServiceProvider::class,
+        OverPugs\Providers\BroadcastServiceProvider::class,
+        OverPugs\Providers\EventServiceProvider::class,
+        OverPugs\Providers\RouteServiceProvider::class,
 
         /*
          * Vendor Service Providers...

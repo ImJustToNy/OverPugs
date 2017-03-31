@@ -1,6 +1,6 @@
 <?php
 
-namespace OverwatchLounge\Providers;
+namespace OverPugs\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'OverwatchLounge\Model' => 'OverwatchLounge\Policies\ModelPolicy',
+        'OverPugs\Model' => 'OverPugs\Policies\ModelPolicy',
     ];
 
     /**
