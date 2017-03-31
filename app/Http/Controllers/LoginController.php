@@ -3,6 +3,7 @@
 namespace OverwatchLounge\Http\Controllers;
 
 use Exception;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
@@ -35,7 +36,11 @@ class LoginController extends Controller
 
     public function endpoint(Request $request)
     {
-        $login = Socialite::driver('battlenet')->stateless()->user();
+        try {
+            $login = Socialite::driver('battlenet')->stateless()->user();
+        } catch (ClientException $e) {
+            return redirect()->route('login');
+        }
 
         $user = User::firstOrCreate(
             [
