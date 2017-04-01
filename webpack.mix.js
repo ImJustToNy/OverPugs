@@ -1,5 +1,4 @@
 const { mix } = require('laravel-mix');
-const SentryPlugin = require('webpack-sentry-plugin');
 
 /*
  |--------------------------------------------------------------------------
@@ -12,27 +11,11 @@ const SentryPlugin = require('webpack-sentry-plugin');
  |
  */
 
-if (process.env.NODE_ENV == 'production')
-    mix
-        .copy('resources/assets/images', 'public/images')
-        .webpackConfig({
-            plugins: [
-                new SentryPlugin({
-                    organisation: 'OverPugs',
-                    project: 'OverPugs',
-                    apiKey: process.env.SENTRY_API_KEY,
-                  
-                    release: function () {
-                        return process.env.GIT_SHA
-                    }
-                })
-            ]
-        })
-;
+if (process.env.NODE_ENV == 'production') mix.copy('resources/assets/images', 'public/images');
 
 mix
     .js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css')
-    // .sourceMaps()
+    .sourceMaps()
     .version()
 ;
