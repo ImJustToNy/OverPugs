@@ -11,7 +11,7 @@ const { mix } = require('laravel-mix');
  |
  */
 
-if (process.env.NODE_ENV == 'production') mix.copy('resources/assets/images', 'public/images').sourceMaps();
+if (process.env.NODE_ENV == 'production') mix.copy('resources/assets/images', 'public/images');
 
 mix
     .js('resources/assets/js/app.js', 'public/js')
