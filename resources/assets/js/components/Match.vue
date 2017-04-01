@@ -68,7 +68,7 @@
 
     beforeMount () {
       if (window.overwatchLounge.askedMatch == '0') {
-        this.error = 'No match like that found or it expired';
+        this.error = 'No lobby like that found or it expired';
       } else if (window.overwatchLounge.askedMatch != null) {
         this.match = window.overwatchLounge.askedMatch;
       }

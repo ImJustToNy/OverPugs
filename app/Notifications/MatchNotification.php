@@ -46,11 +46,11 @@ class MatchNotification extends Notification
 
         return (new SlackMessage)
             ->success()
+            // ->content('Want to make your own lobby? ' . route('home'))
             ->from(substr($match->user->tag, 0, strpos($match->user->tag, "#")))
             ->image($match->user->{$match->region . '_profile'}->avatar_url)
             ->attachment(function ($attachment) use ($match) {
                 $howMuch = $match->howMuch;
-                $languages = '';
 
                 for ($i = 0; $i < $match->howMuch; $i++) {
                     $howMuch .= ' :person_frowning:';
@@ -63,14 +63,10 @@ class MatchNotification extends Notification
                     'brawl' => 'Brawl',
                 ];
 
-                foreach ($match->languages as $language) {
-                    $languages .= ' :flag_' . $language . ':';
-                }
-
                 $fields = [
                     'Region' => ':flag_' . $match->region . ': ' . strtoupper($match->region),
                     'Type' => $games[$this->match->type],
-                    'Languages' => $languages,
+                    'Languages' => strtoupper(implode(' ', $match->languages)),
                     'How Many' => $howMuch,
                 ];
 
@@ -84,6 +80,9 @@ class MatchNotification extends Notification
                 if ($match->invitationLink) {
                     $fields['Invitation'] = $match->invitationLink;
                 }
+
+                $attachment->footer('Want to make your own lobby? ' . route('home'));
+                $attachment->footerIcon('https://overwatchlounge.herokuapp.com/images/logo.png');
 
                 $attachment->title('Click for more details', route('getMatch', $match->id))->fields($fields);
             });

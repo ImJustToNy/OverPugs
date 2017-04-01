@@ -51,7 +51,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="game in matches" v-show="game.region == region" v-bind:class="{ warning: game.user.tag == user.tag }" v-if="check(game)">
+        <tr v-for="game in matches" v-show="game.region == region" v-bind:class="{ warning: user && (game.user.tag == user.tag) }" v-if="check(game)">
           <td>
             <img class="ui avatar image" v-bind:src="game.user[game.region + '_profile'].avatar_url">{{ game.user.tag | friendlyTag }}
           </td>
@@ -227,6 +227,8 @@
     mounted () {
       this.getMatches();
       this.setupMatchRefresher();
+
+      console.log('Heads up!');
 
       new Clipboard('.copier');
     }
