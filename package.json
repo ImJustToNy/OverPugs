@@ -18,6 +18,7 @@
     "semantic-ui-css": "^2.2.9",
     "vue": "^2.1.10",
     "vue-resource": "^1.2.1",
-    "vuex": "^2.2.1"
+    "vuex": "^2.2.1",
+    "webpack-sentry-plugin": "^1.9.1"
   }
 }

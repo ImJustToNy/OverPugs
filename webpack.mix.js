@@ -11,7 +11,23 @@ const { mix } = require('laravel-mix');
  |
  */
 
-if (process.env.NODE_ENV == 'production') mix.copy('resources/assets/images', 'public/images');
+if (process.env.NODE_ENV == 'production')
+    mix
+        .copy('resources/assets/images', 'public/images')
+        .webpackConfig({
+            plugins: [
+                new SentryPlugin({
+                    organisation: 'OverPugs',
+                    project: 'OverPugs',
+                    apiKey: process.env.SENTRY_API_KEY,
+                  
+                    release: function () {
+                        return process.env.GIT_SHA
+                    }
+                })
+            ]
+        })
+;
 
 mix
     .js('resources/assets/js/app.js', 'public/js')
