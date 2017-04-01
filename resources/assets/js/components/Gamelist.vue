@@ -133,13 +133,13 @@
 
       setupMatchRefresher: function () {
         Echo.channel('matches')
-          .listen('.OverwatchLounge.Events.NewMatch', (e) => {
+          .listen('.OverPugs.Events.NewMatch', (e) => {
             var matches = this.matches;
             matches.push(e.match);
             
             this.$store.dispatch('updateMatches', matches);
           })
-          .listen('.OverwatchLounge.Events.UpdateExpire', (e) => {
+          .listen('.OverPugs.Events.UpdateExpire', (e) => {
             var matches = this.matches;
 
             matches.forEach(function (item, key) {
@@ -150,7 +150,7 @@
 
             this.$store.dispatch('updateMatches', matches);
           })
-          .listen('.OverwatchLounge.Events.DeleteMatch', (e) => {
+          .listen('.OverPugs.Events.DeleteMatch', (e) => {
             var matches = this.matches;
 
             matches.forEach(function (item, key) {
