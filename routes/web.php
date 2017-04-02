@@ -33,6 +33,6 @@ Route::get('login', 'LoginController@login')->name('login');
 Route::get('login/discord', 'LoginController@loginDiscord')->name('loginDiscord');
 
 Route::get('endpoint', 'LoginController@endpoint');
-Route::get('endpoint/discord', 'LoginController@discordEndpoint');
+Route::get('endpoint/discord', 'LoginController@endpointDiscord');
 
 Route::get('logout', 'LoginController@logout')->name('logout');

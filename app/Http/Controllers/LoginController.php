@@ -19,12 +19,17 @@ class LoginController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->middleware('guest', ['except' => ['logout', 'loginDiscord', 'endpointDiscord']]);
     }
 
     public function login()
     {
         return Socialite::with('battlenet')->stateless()->redirect();
+    }
+
+    public function loginDiscord()
+    {
+        return Socialite::with('discord')->redirect();
     }
 
     public function logout()
@@ -82,5 +87,10 @@ class LoginController extends Controller
         Auth::login($user, true);
 
         return redirect()->route('home');
+    }
+
+    public function endpointDiscord()
+    {
+        dd(Socialite::driver('discord')->user());
     }
 }
