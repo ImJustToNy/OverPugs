@@ -3,7 +3,6 @@
 namespace OverPugs\Http\Controllers;
 
 use Exception;
-use GuzzleHttp\Exception\ClientException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
@@ -19,12 +18,17 @@ class LoginController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->middleware('guest', ['except' => ['logout', 'loginDiscord', 'endpointDiscord']]);
     }
 
     public function login()
     {
         return Socialite::with('battlenet')->stateless()->redirect();
+    }
+
+    public function loginDiscord()
+    {
+        return Socialite::with('discord')->scopes(['identify'])->redirect();
     }
 
     public function logout()
@@ -38,7 +42,7 @@ class LoginController extends Controller
     {
         try {
             $login = Socialite::driver('battlenet')->stateless()->user();
-        } catch (ClientException $e) {
+        } catch (Exception $e) {
             return redirect()->route('login');
         }
 
@@ -80,6 +84,24 @@ class LoginController extends Controller
         $user->save();
 
         Auth::login($user, true);
+
+        return redirect()->route('home');
+    }
+
+    public function endpointDiscord(Request $request)
+    {
+        try {
+            $profile = Socialite::driver('discord')->user();
+        } catch (Exception $e) {
+            return redirect()->route('loginDiscord');
+        }
+
+        $user = Auth::user();
+
+        $user->discord_id = $profile->id;
+        $user->discord_nickname = $profile->nickname;
+
+        $user->save();
 
         return redirect()->route('home');
     }
