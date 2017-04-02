@@ -9,8 +9,8 @@ use OverPugs\Events\DeleteMatch;
 use OverPugs\Events\NewMatch;
 use OverPugs\Events\UpdateExpire;
 use OverPugs\Match;
-use OverPugs\Notifications\MatchNotification;
 use OverPugs\User;
+use RestCord\DiscordClient;
 
 class MatchController extends Controller
 {
@@ -110,7 +110,10 @@ class MatchController extends Controller
         $userMatch = $this->userMatch();
 
         event(new NewMatch($userMatch->toArray()));
-        $request->user()->notify(new MatchNotification($userMatch));
+
+        $this->buildNotification($match);
+
+        // $request->user()->notify(new MatchNotification($userMatch));
 
         return response()->json(['match' => $userMatch]);
     }
@@ -129,5 +132,82 @@ class MatchController extends Controller
     private function userMatch()
     {
         return User::find(Auth::id())->matches()->with('user')->where('expireAt', '>', Carbon::now())->firstOrFail();
+    }
+
+    private function buildNotification($match)
+    {
+        $discord = new DiscordClient(['token' => env('DISCORD_TOKEN')]);
+
+        $howMany = $match->howMany;
+
+        for ($i = 0; $i < $match->howMany; $i++) {
+            $howMany .= ' :person_frowning:';
+        }
+
+        $games = [
+            'qp' => 'Quick Play',
+            'comp' => 'Competitive',
+            'custom' => 'Custom games',
+            'brawl' => 'Brawl',
+        ];
+
+        $fields = [
+            [
+                'name' => 'Region',
+                'value' => ':flag_' . $match->region . ': ' . strtoupper($match->region),
+            ],
+            [
+                'name' => 'Type',
+                'value' => $games[$match->type],
+            ],
+            [
+                'name' => 'Languages',
+                'value' => strtoupper(implode(' ', $match->languages)),
+            ],
+            [
+                'name' => 'How Many',
+                'value' => $howMany,
+            ],
+        ];
+
+        if ($match->type == 'comp') {
+            $fields[] = [
+                'name' => 'Min Rank',
+                'value' => $match->minRank,
+            ];
+            $fields[] = [
+                'name' => 'Max Rank',
+                'value' => $match->maxRank,
+            ];
+        } else {
+            $fields[] = [
+                'name' => 'Description',
+                'value' => $match->description,
+            ];
+        }
+
+        if ($match->invitationLink) {
+            $fields[] = [
+                'name' => 'Invitation',
+                'value' => $match->invitationLink,
+            ];
+        }
+
+        dd($discord->channel->createMessage([
+            'channel.id' => intval(env('DISCORD_CHANNELID')),
+            'content' => ':white_check_mark: Available',
+            'embed' => [
+                'title' => 'Click for more details',
+                'url' => route('getMatch', $match->id),
+
+                // 'fields' => $fields,
+                "author" => [
+                    "name" => "Want to make your own lobby? Click here!",
+                    "url" => route('home'),
+                    "icon_url" => "https://overwatchlounge.herokuapp.com/images/logo.png",
+                ],
+            ],
+        ]));
+
     }
 }
