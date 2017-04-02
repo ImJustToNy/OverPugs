@@ -47,7 +47,7 @@ class EditExpiredMatches extends Command
             $discord->channel->editMessage([
                 'channel.id' => intval(env('DISCORD_CHANNELID')),
                 'message.id' => intval($match->message_id),
-                'content' => ':no_entry_sign: Expired / Deleted',
+                'content' => ':no_entry_sign: Expired',
             ]);
 
             $match->message_deleted = true;
