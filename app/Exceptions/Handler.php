@@ -34,7 +34,7 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        if ($this->shouldReport($exception)) {
+        if (app()->environment('production') && $this->shouldReport($exception)) {
             $this->sentryID = app('sentry')->captureException($exception);
         }
 
