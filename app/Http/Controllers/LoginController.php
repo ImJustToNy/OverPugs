@@ -91,6 +91,12 @@ class LoginController extends Controller
 
     public function endpointDiscord()
     {
-        dd(Socialite::driver('discord')->user());
+        try {
+            $profile = Socialite::driver('discord')->user();
+        } catch (ClientException $e) {
+            return redirect()->route('loginDiscord');
+        }
+
+        dd($profile);
     }
 }
