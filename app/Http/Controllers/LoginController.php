@@ -88,7 +88,7 @@ class LoginController extends Controller
         return redirect()->route('home');
     }
 
-    public function endpointDiscord()
+    public function endpointDiscord(Request $request)
     {
         try {
             $profile = Socialite::driver('discord')->user();
@@ -96,6 +96,13 @@ class LoginController extends Controller
             return redirect()->route('loginDiscord');
         }
 
-        dd($profile);
+        $user = Auth::user();
+
+        $user->discord_id = $profile->id;
+        $user->discord_nickname = $profile->nickname;
+
+        $user->save();
+
+        return redirect()->route('home');
     }
 }
