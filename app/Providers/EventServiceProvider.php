@@ -19,6 +19,7 @@ class EventServiceProvider extends ServiceProvider
 
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
             'SocialiteProviders\Battlenet\BattlenetExtendSocialite@handle',
+            'SocialiteProviders\Discord\DiscordExtendSocialite@handle',
         ],
     ];
 
