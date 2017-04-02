@@ -28,7 +28,7 @@ class LoginController extends Controller
 
     public function loginDiscord()
     {
-        return Socialite::with('discord')->redirect();
+        return Socialite::with('discord')->scopes(['identify'])->redirect();
     }
 
     public function logout()
