@@ -229,8 +229,6 @@
       this.getMatches();
       this.setupMatchRefresher();
 
-      console.log('Heads up!');
-
       new Clipboard('.copier');
     }
   }
