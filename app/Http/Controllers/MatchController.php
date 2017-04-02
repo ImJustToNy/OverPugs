@@ -138,9 +138,9 @@ class MatchController extends Controller
     {
         $discord = new DiscordClient(['token' => env('DISCORD_TOKEN')]);
 
-        $howMany = $match->howMany;
+        $howMany = $match->howMuch;
 
-        for ($i = 0; $i < $match->howMany; $i++) {
+        for ($i = 0; $i < $howMany; $i++) {
             $howMany .= ' :person_frowning:';
         }
 
@@ -155,18 +155,22 @@ class MatchController extends Controller
             [
                 'name' => 'Region',
                 'value' => ':flag_' . $match->region . ': ' . strtoupper($match->region),
+                'inline' => true,
             ],
             [
                 'name' => 'Type',
                 'value' => $games[$match->type],
+                'inline' => true,
             ],
             [
                 'name' => 'Languages',
                 'value' => strtoupper(implode(' ', $match->languages)),
+                'inline' => true,
             ],
             [
                 'name' => 'How Many',
                 'value' => $howMany,
+                'inline' => true,
             ],
         ];
 
@@ -174,15 +178,18 @@ class MatchController extends Controller
             $fields[] = [
                 'name' => 'Min Rank',
                 'value' => $match->minRank,
+                'inline' => true,
             ];
             $fields[] = [
                 'name' => 'Max Rank',
                 'value' => $match->maxRank,
+                'inline' => true,
             ];
         } else {
             $fields[] = [
                 'name' => 'Description',
                 'value' => $match->description,
+                'inline' => true,
             ];
         }
 
@@ -190,24 +197,28 @@ class MatchController extends Controller
             $fields[] = [
                 'name' => 'Invitation',
                 'value' => $match->invitationLink,
+                'inline' => true,
             ];
         }
 
-        dd($discord->channel->createMessage([
+        $message = $discord->channel->createMessage([
             'channel.id' => intval(env('DISCORD_CHANNELID')),
             'content' => ':white_check_mark: Available',
             'embed' => [
                 'title' => 'Click for more details',
                 'url' => route('getMatch', $match->id),
+                'color' => 14290439,
 
-                // 'fields' => $fields,
+                'fields' => $fields,
                 "author" => [
-                    "name" => "Want to make your own lobby? Click here!",
+                    "text" => "Want to create your own lobby? Click here!",
                     "url" => route('home'),
                     "icon_url" => "https://overwatchlounge.herokuapp.com/images/logo.png",
                 ],
             ],
-        ]));
+        ]);
 
+        $match->message_id = $message['id'];
+        $match->save();
     }
 }
