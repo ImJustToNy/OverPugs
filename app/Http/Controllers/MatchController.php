@@ -136,8 +136,6 @@ class MatchController extends Controller
 
     private function buildNotification($match)
     {
-        $discord = new DiscordClient(['token' => env('DISCORD_TOKEN')]);
-
         $howMany = $match->howMuch;
 
         for ($i = 0; $i < $howMany; $i++) {
@@ -208,7 +206,7 @@ class MatchController extends Controller
             ];
         }
 
-        $message = $discord->channel->createMessage([
+        $message = $this->getDiscordClient()->channel->createMessage([
             'channel.id' => intval(env('DISCORD_CHANNELID')),
             'content' => ':white_check_mark: Available',
             'embed' => [
@@ -227,5 +225,10 @@ class MatchController extends Controller
 
         $match->message_id = $message['id'];
         $match->save();
+    }
+
+    private function getDiscordClient()
+    {
+        return new DiscordClient(['token' => env('DISCORD_TOKEN')]);
     }
 }
