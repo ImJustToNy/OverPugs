@@ -3,7 +3,6 @@
 namespace OverPugs\Http\Controllers;
 
 use Exception;
-use GuzzleHttp\Exception\ClientException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
@@ -43,7 +42,7 @@ class LoginController extends Controller
     {
         try {
             $login = Socialite::driver('battlenet')->stateless()->user();
-        } catch (ClientException $e) {
+        } catch (Exception $e) {
             return redirect()->route('login');
         }
 
@@ -93,7 +92,7 @@ class LoginController extends Controller
     {
         try {
             $profile = Socialite::driver('discord')->user();
-        } catch (ClientException $e) {
+        } catch (Exception $e) {
             return redirect()->route('loginDiscord');
         }
 
