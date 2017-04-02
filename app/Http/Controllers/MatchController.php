@@ -201,6 +201,13 @@ class MatchController extends Controller
             ];
         }
 
+        if (Auth::user()->discord_id) {
+            $fields[] = [
+                'name' => 'Discord Tag',
+                'value' => '<@' . Auth::user()->discord_id . '>',
+            ];
+        }
+
         $message = $discord->channel->createMessage([
             'channel.id' => intval(env('DISCORD_CHANNELID')),
             'content' => ':white_check_mark: Available',
