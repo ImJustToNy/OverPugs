@@ -61,6 +61,7 @@
                 <option value="us" selected><i class="flag us"></i> English</option>
                 <option value="de"><i class="flag de"></i> German</option>
                 <option value="pl"><i class="flag pl"></i> Polish</option>
+                <option value="fr"><i class="flag fr"></i> French</option>
               </select>
             </div>
           </div>
