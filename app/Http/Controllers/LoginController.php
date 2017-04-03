@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 use OverPugs\Http\Controllers\Controller;
 use OverPugs\User;
@@ -18,7 +19,7 @@ class LoginController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest', ['except' => ['logout', 'loginDiscord', 'endpointDiscord']]);
+        $this->middleware('guest', ['except' => ['logout']]);
     }
 
     public function login()
@@ -83,6 +84,14 @@ class LoginController extends Controller
 
         $user->save();
 
+        if (!$user->discord_id) {
+
+            Session::put('temp_user_id', $user->id);
+
+            return redirect()->route('loginDiscord');
+
+        }
+
         Auth::login($user, true);
 
         return redirect()->route('home');
@@ -96,12 +105,14 @@ class LoginController extends Controller
             return redirect()->route('loginDiscord');
         }
 
-        $user = Auth::user();
+        $user = User::findOrFail(Session::get('temp_user_id'));
 
         $user->discord_id = $profile->id;
         $user->discord_nickname = $profile->nickname;
 
         $user->save();
+
+        Auth::login($user, true);
 
         return redirect()->route('home');
     }

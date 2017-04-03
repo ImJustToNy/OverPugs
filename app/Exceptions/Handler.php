@@ -34,7 +34,7 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        if (app()->environment('production') && $this->shouldReport($exception)) {
+        if (!config('app.debug') && $this->shouldReport($exception)) {
             $this->sentryID = app('sentry')->captureException($exception);
         }
 
@@ -50,9 +50,13 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return response()->view('errors.500', [
-            'sentryID' => $this->sentryID,
-        ], 500);
+        if (!config('app.debug')) {
+            return response()->view('errors.500', [
+                'sentryID' => $this->sentryID,
+            ], 500);
+        }
+
+        return parent::render($request, $exception);
     }
 
     /**
