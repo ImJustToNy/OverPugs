@@ -109,6 +109,7 @@ class LoginController extends Controller
 
         $user->discord_id = $profile->id;
         $user->discord_nickname = $profile->nickname;
+        $user->discord_avatar_url = $profile->avatar;
 
         $user->save();
 
