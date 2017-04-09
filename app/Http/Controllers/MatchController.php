@@ -209,15 +209,15 @@ class MatchController extends Controller
             'channel.id' => intval(env('DISCORD_CHANNELID')),
             'content' => ':white_check_mark: Available',
             'embed' => [
-                'title' => 'Click for more details',
+                'title' => ':book: More details',
                 'url' => route('getMatch', $match->id),
                 'color' => 14290439,
 
                 'fields' => $fields,
                 'author' => [
-                    "name" => "Want to create your own lobby? Click here!",
-                    "url" => route('home'),
-                    "icon_url" => "https://overwatchlounge.herokuapp.com/images/logo.png",
+                    'name' => 'Want to create your own lobby? Click here!',
+                    'url' => route('home'),
+                    'icon_url' => 'https://overwatchlounge.herokuapp.com/images/logo.png',
                 ],
             ],
         ]);
