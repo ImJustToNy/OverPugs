@@ -203,6 +203,7 @@ class MatchController extends Controller
             $fields[] = [
                 'name' => 'Discord Tag',
                 'value' => '<@' . Auth::user()->discord_id . '>',
+                'inline' => true,
             ];
         }
 
