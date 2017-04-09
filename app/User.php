@@ -38,9 +38,4 @@ class User extends Authenticatable
     {
         return json_decode($value);
     }
-
-    public function routeNotificationForSlack()
-    {
-        return env('SLACK_WEBHOOK_URL');
-    }
 }

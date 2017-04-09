@@ -113,8 +113,6 @@ class MatchController extends Controller
 
         $this->buildNotification($match);
 
-        // $request->user()->notify(new MatchNotification($userMatch));
-
         return response()->json(['match' => $userMatch]);
     }
 
