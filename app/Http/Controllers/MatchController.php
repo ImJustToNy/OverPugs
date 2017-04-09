@@ -214,8 +214,8 @@ class MatchController extends Controller
                 'color' => 14290439,
 
                 'fields' => $fields,
-                "author" => [
-                    "text" => "Want to create your own lobby? Click here!",
+                'author' => [
+                    "name" => "Want to create your own lobby? Click here!",
                     "url" => route('home'),
                     "icon_url" => "https://overwatchlounge.herokuapp.com/images/logo.png",
                 ],
