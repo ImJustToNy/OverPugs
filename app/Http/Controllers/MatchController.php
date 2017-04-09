@@ -136,9 +136,7 @@ class MatchController extends Controller
     {
         $howMany = $match->howMuch;
 
-        for ($i = 0; $i < $howMany; $i++) {
-            $howMany .= ' :person_frowning:';
-        }
+        $howMany = $howMany . str_repeat(' :person_frowning:', $howMany);
 
         $games = [
             'qp' => 'Quick Play',
