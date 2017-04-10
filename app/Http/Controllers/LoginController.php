@@ -62,13 +62,17 @@ class LoginController extends Controller
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-            $result = json_decode(curl_exec($ch));
+            $result_raw = curl_exec($ch);
 
             if (curl_errno($ch)) {
+                app('sentry')->captureMessage('We got an error from lootbox api!', $result_raw);
+
                 throw new Exception('Can\'t retrieve informations from API');
             }
 
             curl_close($ch);
+
+            $result = json_decode($result_raw);
 
             if (isset($result->error)) {
                 $profile = null;
