@@ -104,7 +104,7 @@ class MatchController extends Controller
         $match->minRank = $request->minRank;
         $match->maxRank = $request->maxRank;
         $match->invitationLink = $request->invitationLink;
-        $match->expireAt = Carbon::now()->addMinutes(1);
+        $match->expireAt = Carbon::now()->addMinutes(5);
 
         $request->user()->matches()->save($match);
         $userMatch = $this->userMatch();
