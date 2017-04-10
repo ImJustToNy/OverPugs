@@ -61,27 +61,23 @@ class LoginController extends Controller
             try {
                 $portrait = $dom->find('.player-portrait')->getAttribute('src');
             } catch (Exception $e) {
-                $profile = null;
+                $user->{$region . '_profile'} = null;
+
+                break;
             }
 
-            if (!isset($profile)) {
+            $rank_wrapper = $dom->find('.competitive-rank', 0);
 
-                $rank_wrapper = $dom->find('.competitive-rank', 0);
-
-                if (!is_null($rank_wrapper)) {
-                    $rank = $rank_wrapper->find('.h6', 0)->text;
-                } else {
-                    $rank = 0;
-                }
-
-                $profile = json_encode([
-                    'rank' => $rank,
-                    'avatar_url' => $portrait,
-                ]);
-
+            if (!is_null($rank_wrapper)) {
+                $rank = $rank_wrapper->find('.h6', 0)->text;
+            } else {
+                $rank = 0;
             }
 
-            $user->{$region . '_profile'} = $profile;
+            $user->{$region . '_profile'} = json_encode([
+                'rank' => $rank,
+                'avatar_url' => $portrait,
+            ]);
         }
 
         $user->save();
