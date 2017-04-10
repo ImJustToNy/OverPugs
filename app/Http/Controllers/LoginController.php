@@ -65,7 +65,7 @@ class LoginController extends Controller
             $result_raw = curl_exec($ch);
 
             if (curl_errno($ch)) {
-                app('sentry')->captureMessage('We got an error from lootbox api!', $result_raw);
+                app('sentry')->captureMessage('We got an error from lootbox api!', ['message' => curl_error($ch)]);
 
                 throw new Exception('Can\'t retrieve informations from API');
             }
