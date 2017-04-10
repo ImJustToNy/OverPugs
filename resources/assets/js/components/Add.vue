@@ -10,7 +10,7 @@
           <div class="field">
             <label>Type</label>
             <select class="ui fluid dropdown" name="type" v-model="type">
-              <option value="comp"><a class="ui mini red label">Competive</a></option>
+              <option value="comp"><a class="ui mini red label">Competitive</a></option>
               <option value="qp"><a class="ui mini green label">Quick Play</a></option>
               <option value="custom"><a class="ui mini blue label">Custom Games</a></option>
               <option value="brawl"><a class="ui mini yellow label">Brawl</a></option>
