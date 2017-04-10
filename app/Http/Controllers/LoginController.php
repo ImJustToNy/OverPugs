@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 use OverPugs\Http\Controllers\Controller;
 use OverPugs\User;
+use PHPHtmlParser\Dom;
 
 class LoginController extends Controller
 {
@@ -53,34 +54,31 @@ class LoginController extends Controller
             ]
         );
 
-        $regions = ['us', 'eu', 'kr'];
+        foreach (['us', 'eu', 'kr'] as $region) {
+            $dom = new Dom;
+            $dom->load('https://playoverwatch.com/en-US/career/pc/' . $region . '/' . str_replace('#', '-', $user->tag));
 
-        foreach ($regions as $region) {
-            $url = 'https://api.lootbox.eu/pc/' . $region . '/' . str_replace('#', '-', $user->tag) . '/profile';
-
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-            $result_raw = curl_exec($ch);
-
-            if (curl_errno($ch)) {
-                app('sentry')->captureMessage('We got an error from lootbox api!', ['message' => curl_error($ch)]);
-
-                throw new Exception('Can\'t retrieve informations from API');
+            try {
+                $portrait = $dom->find('.player-portrait')->getAttribute('src');
+            } catch (Exception $e) {
+                $profile = null;
             }
 
-            curl_close($ch);
+            if (!isset($profile)) {
 
-            $result = json_decode($result_raw);
+                $rank_wrapper = $dom->find('.competitive-rank', 0);
 
-            if (isset($result->error)) {
-                $profile = null;
-            } else {
+                if (!is_null($rank_wrapper)) {
+                    $rank = $rank_wrapper->find('.h6', 0)->text;
+                } else {
+                    $rank = 0;
+                }
+
                 $profile = json_encode([
-                    'rank' => intval($result->data->competitive->rank),
-                    'avatar_url' => $result->data->avatar,
+                    'rank' => $rank,
+                    'avatar_url' => $portrait,
                 ]);
+
             }
 
             $user->{$region . '_profile'} = $profile;
