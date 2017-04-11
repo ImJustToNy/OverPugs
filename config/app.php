@@ -178,6 +178,11 @@ return [
         OverPugs\Providers\RouteServiceProvider::class,
 
         /*
+         * Own Service Providers...
+         */
+        OverPugs\Providers\DiscordServiceProvider::class,
+
+        /*
          * Vendor Service Providers...
          */
         SocialiteProviders\Manager\ServiceProvider::class,

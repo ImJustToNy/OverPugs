@@ -5,7 +5,6 @@ namespace OverPugs\Console\Commands;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use OverPugs\Match;
-use RestCord\DiscordClient;
 
 class EditExpiredMatches extends Command
 {
@@ -41,7 +40,7 @@ class EditExpiredMatches extends Command
     public function handle()
     {
         $matches = Match::where('expireAt', '<', Carbon::now())->where('message_deleted', false)->get();
-        $discord = new DiscordClient(['token' => env('DISCORD_TOKEN')]);
+        $discord = resolve('RestCord\DiscordClient');
 
         foreach ($matches as $match) {
             $discord->channel->editMessage([
