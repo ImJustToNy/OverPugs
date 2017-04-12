@@ -30,6 +30,8 @@ class LoginController extends Controller
 
     public function loginDiscord()
     {
+        abort_unless(Session::has('temp_user_id'), 404);
+
         return Socialite::with('discord')->scopes(['identify'])->redirect();
     }
 
