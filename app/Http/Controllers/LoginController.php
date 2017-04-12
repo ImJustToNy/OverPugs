@@ -58,7 +58,7 @@ class LoginController extends Controller
 
         foreach (['us', 'eu', 'kr'] as $region) {
             $dom = new Dom;
-            $dom->load('https://playoverwatch.com/en-US/career/pc/' . $region . '/' . str_replace('#', '-', $user->tag));
+            $dom->load('https://playoverwatch.com/en-us/career/pc/' . $region . '/' . str_replace('#', '-', $user->tag));
 
             try {
                 $portrait = $dom->find('.player-portrait')->getAttribute('src');
