@@ -133,10 +133,6 @@
 
       redirectToLogin: function () {
         window.location.href = '/login';
-      },
-
-      redirectToDiscordLogin: function () {
-        window.location.href = '/login/discord';
       }
     }
   }
