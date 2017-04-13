@@ -17,4 +17,11 @@ mix
     .js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css')
     .version()
+    .options({
+        uglify: {
+          compress: {
+            drop_console: false
+          }
+        }
+    })
 ;
