@@ -8,11 +8,11 @@ class HomeController extends Controller
 {
     public function home()
     {
-        // if (Auth::check()) {
-        $user = collect(Auth::user())->only(['tag', 'prefered_region', 'us_profile', 'eu_profile', 'kr_profile', 'discord_nickname', 'discord_avatar_url'])->first();
-        // } else {
-        //     $user = null;
-        // }
+        if (Auth::check()) {
+            $user = collect(Auth::user())->only(['tag', 'prefered_region', 'us_profile', 'eu_profile', 'kr_profile', 'discord_nickname', 'discord_avatar_url']);
+        } else {
+            $user = null;
+        }
 
         return view('layout', [
             'user' => $user,
