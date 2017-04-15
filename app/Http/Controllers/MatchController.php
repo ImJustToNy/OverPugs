@@ -30,7 +30,7 @@ class MatchController extends Controller
 
         $userMatch = $this->userMatch();
 
-        event(new UpdateExpire($userMatch->toArray()));
+        event(new UpdateExpire($userMatch));
 
         return response()->json([
             'status' => 'ok',
@@ -63,35 +63,35 @@ class MatchController extends Controller
         ]);
 
         if (isset($request->invitationLink) && !preg_match('/https?:\/\/discord\.gg\/[a-z0-9]{3,}/i', $request->invitationLink)) {
-            return response()->json(['error' => 'This is not correct discord invitation link'], 400);
+            return response()->json(['error' => 'This is not correct discord invitation link'], 422);
         }
 
         if (is_null($request->user()->{$request->region . '_profile'})) {
-            return response()->json(['error' => 'You can\'t create game on server where you have no profile'], 400);
+            return response()->json(['error' => 'You can\'t create game on server where you have no profile'], 422);
         }
 
         $profile = $request->user()->{$request->region . '_profile'};
 
         if ($request->type == 'comp') {
             if ($request->minRank > $request->maxRank) {
-                return response()->json(['error' => 'Minimum rank must be smaller than Maximum rank'], 400);
+                return response()->json(['error' => 'Minimum rank must be smaller than Maximum rank'], 422);
             }
 
             if (!isset($request->minRank) || !isset($request->maxRank)) {
-                return response()->json(['error' => 'You must specify Minimum rank and Maximum rank'], 400);
+                return response()->json(['error' => 'You must specify Minimum rank and Maximum rank'], 422);
             }
 
             if ($request->minRank < $profile->rank - 1000 || $request->maxRank < $profile->rank - 1000) {
-                return response()->json(['error' => 'Mininmum rank and Maximum rank should be in 1000 points range'], 400);
+                return response()->json(['error' => 'Mininmum rank and Maximum rank should be in 1000 points range'], 422);
             }
         } else {
             if (!isset($request->description) && $request->type != 'comp') {
-                return response()->json(['error' => 'You must specify description'], 400);
+                return response()->json(['error' => 'You must specify description'], 422);
             }
         }
 
         if (!is_null(Auth::user()->matches()->where('expireAt', '>', Carbon::now())->first())) {
-            return response()->json(['error' => 'You already have ongoing match'], 400);
+            return response()->json(['error' => 'You already have ongoing match'], 422);
         }
 
         $match = new Match;
@@ -109,7 +109,7 @@ class MatchController extends Controller
         $request->user()->matches()->save($match);
         $userMatch = $this->userMatch();
 
-        event(new NewMatch($userMatch->toArray()));
+        event(new NewMatch($userMatch));
 
         dispatch(new BuildDiscordNotification($match));
 
