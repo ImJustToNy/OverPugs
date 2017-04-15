@@ -20,7 +20,7 @@ class AddMatchTest extends TestCase
     private $user;
 
     /**
-     * Generate user
+     * Generate user and setup fake queue and event bus
      *
      * @return void
      */
