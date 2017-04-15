@@ -33,8 +33,9 @@ class AddMatchTest extends TestCase
 
     /**
      * Adding correct competitive match,
-     * Refreshing it
-     * and deleting
+     * refreshing it,
+     * trying to check it out
+     * and deleting it
      *
      * @return void
      */
