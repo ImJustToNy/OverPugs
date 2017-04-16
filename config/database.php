@@ -66,19 +66,6 @@ return [
             'sslmode' => 'prefer',
         ],
 
-        'buddy' => [
-            'driver' => 'pgsql',
-            'host' => 'postgres',
-            'port' => '5432',
-            'database' => 'buddy',
-            'username' => 'postgres',
-            'password' => 'qwerty',
-            'charset' => 'utf8',
-            'prefix' => '',
-            'schema' => 'public',
-            'sslmode' => 'prefer',
-        ],
-
     ],
 
     /*
