@@ -9,11 +9,11 @@ use Tests\TestCase;
 class ExpireCommandTest extends TestCase
 {
     /**
-     * A basic test example.
+     * Creates new expired match and tires if discord message would be editted successfuly
      *
      * @return void
      */
-    public function testExample()
+    public function testExpiredCommand()
     {
         $match = factory(Match::class)->states('expired')->create();
 
