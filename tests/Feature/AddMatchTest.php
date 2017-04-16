@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Queue;
 use OverPugs\Events\DeleteMatch;
@@ -38,7 +39,8 @@ class AddMatchTest extends TestCase
      * Adding correct competitive match,
      * refreshing it,
      * trying to check it out
-     * and deleting it
+     * deleting it
+     * and editing discord message
      *
      * @return void
      */
@@ -96,6 +98,13 @@ class AddMatchTest extends TestCase
         Event::assertDispatched(DeleteMatch::class, function ($event) use ($refreshedMatch) {
             return $refreshedMatch['match']['id'] == $event->id;
         });
+
+        Artisan::call('discord:expired');
+
+        $this->assertDatabaseHas('matches', [
+            'id' => $match['match']['id'],
+            'message_deleted' => true,
+        ]);
     }
 
     /**
