@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Carbon\Carbon;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Queue;
 use OverPugs\Events\DeleteMatch;
