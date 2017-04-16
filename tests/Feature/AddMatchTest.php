@@ -104,7 +104,7 @@ class AddMatchTest extends TestCase
      *
      * @return void
      */
-    public function testMatchWithoutDescription()
+    public function testIncorrectMatch()
     {
         $this->actingAs($this->user)
             ->json('POST', '/api/match/add', [
