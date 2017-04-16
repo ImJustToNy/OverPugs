@@ -25,3 +25,23 @@ $factory->define(OverPugs\User::class, function (Faker\Generator $faker) {
         'discord_avatar_url' => 'https://blzgdapipro-a.akamaihd.net/game/unlocks/0x0250000000000742.png',
     ];
 });
+
+$factory->define(OverPugs\Match::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => function () {
+            return factory(OverPugs\User::class)->create()->id;
+        },
+        'type' => 'comp',
+        'region' => 'eu',
+        'languages' => 'pl,de',
+        'howMuch' => 1,
+        'minRank' => 2000,
+        'maxRank' => 2500,
+    ];
+});
+
+$factory->state(OverPugs\Match::class, 'expired', function ($faker) {
+    return [
+        'expireAt' => Carbon\Carbon::now()->addMinutes(-10),
+    ];
+});

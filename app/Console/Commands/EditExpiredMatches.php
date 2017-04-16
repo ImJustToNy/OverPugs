@@ -42,8 +42,6 @@ class EditExpiredMatches extends Command
     {
         $matches = Match::where('expireAt', '<', Carbon::now())->where('message_deleted', false)->get();
 
-        die('Works');
-
         foreach ($matches as $match) {
             if (!App::environment('testing')) {
                 resolve('RestCord\DiscordClient')->channel->editMessage([
