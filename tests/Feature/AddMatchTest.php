@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Queue;
 use OverPugs\Events\DeleteMatch;
@@ -15,7 +14,7 @@ use Tests\TestCase;
 
 class AddMatchTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseTransactions;
 
     private $user;
 
@@ -98,12 +97,12 @@ class AddMatchTest extends TestCase
             return $refreshedMatch['match']['id'] == $event->id;
         });
 
-        // Artisan::call('discord:expired');
+        Artisan::call('discord:expired');
 
-        // $this->assertDatabaseHas('matches', [
-        //     'id' => $match['match']['id'],
-        //     'message_deleted' => true,
-        // ]);
+        $this->assertDatabaseHas('matches', [
+            'id' => $match['match']['id'],
+            'message_deleted' => true,
+        ]);
     }
 
     /**
