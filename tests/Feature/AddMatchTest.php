@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Queue;
@@ -16,8 +15,6 @@ use Tests\TestCase;
 
 class AddMatchTest extends TestCase
 {
-    use DatabaseMigrations;
-
     private $user;
 
     /**

@@ -2,16 +2,13 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use OverPugs\User;
 use Tests\TestCase;
 
 class UserTest extends TestCase
 {
-    use DatabaseMigrations;
-
     /**
-     * A basic test example.
+     * Test changing regions
      *
      * @return void
      */
