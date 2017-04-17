@@ -14,11 +14,22 @@ use OverPugs\User;
 
 class MatchController extends Controller
 {
+    /**
+     * Get all available (not expired) matches
+     *
+     * @return Response
+     */
     public function getAvailable()
     {
         return response()->json(Match::where('expireAt', '>', Carbon::now())->with('user')->get());
     }
 
+    /**
+     * Refresh existing match that belongs to user
+     * by adding 5 minutes to it's expire time
+     *
+     * @return Response
+     */
     public function refreshMatch()
     {
         $match = $this->userMatch();
@@ -38,6 +49,13 @@ class MatchController extends Controller
         ]);
     }
 
+    /**
+     * Remove match (not really) by setting it's expired time -10 minutes
+     * which removes it from being selected via getAvailable method
+     *
+     * @param Request $request
+     * @return Response
+     */
     public function deleteMatch(Request $request)
     {
         $match = $this->userMatch();
@@ -50,6 +68,14 @@ class MatchController extends Controller
         return response()->json(['status' => 'ok']);
     }
 
+    /**
+     * Create a new match with data of user's request,
+     * send new event (for real time integration)
+     * and deploy a queue job to create a discord notification
+     *
+     * @param Request $request
+     * @return Response
+     */
     public function addMatch(Request $request)
     {
         $this->validate($request, [
@@ -116,6 +142,15 @@ class MatchController extends Controller
         return response()->json(['match' => $userMatch]);
     }
 
+    /**
+     * Get match via id in url,
+     * which you can get by clicking url in discord message
+     * or return 0 which will show an error message in frontend
+     *
+     * @param Request $request
+     * @param type $id
+     * @return Response
+     */
     public function getMatch(Request $request, $id)
     {
         $match = Match::where('expireAt', '>', Carbon::now())->with('user')->find($id);
@@ -127,6 +162,11 @@ class MatchController extends Controller
         return redirect()->route('home')->with('match', $match);
     }
 
+    /**
+     * Get first user's match that is not expired
+     *
+     * @return Collection
+     */
     private function userMatch()
     {
         return User::find(Auth::id())->matches()->with('user')->where('expireAt', '>', Carbon::now())->firstOrFail();

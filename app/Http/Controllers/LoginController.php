@@ -18,16 +18,32 @@ class LoginController extends Controller
 
     protected $redirectTo = '/';
 
+    /**
+     * Register middleware rules
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('guest', ['except' => ['logout']]);
     }
 
+    /**
+     * Build socialite OAuth URL to authenticate via Battle.net
+     *
+     * @return Battle.net OAuth URL
+     */
     public function login()
     {
         return Socialite::with('battlenet')->stateless()->redirect();
     }
 
+    /**
+     * First, check if temp_user_id exists (it is being set while we are hitting battle.net's endpoint)
+     * if this is true, we will go to discord's OAuth URL
+     *
+     * @return Discord OAuth URL
+     */
     public function loginDiscord()
     {
         if (!Session::has('temp_user_id')) {
@@ -37,6 +53,11 @@ class LoginController extends Controller
         return Socialite::with('discord')->scopes(['identify'])->redirect();
     }
 
+    /**
+     * Drop user's session and redirect home
+     *
+     * @return Redirect home
+     */
     public function logout()
     {
         Auth::logout();
@@ -44,6 +65,17 @@ class LoginController extends Controller
         return redirect()->route('home');
     }
 
+    /**
+     * Main, battle.net's endpoint
+     * We're checking if Auth was successful if not, try once again
+     * create user and assign profile by scrapping playoverwatch.com,
+     * if we don't have discord profile set up already,
+     * set temp_user_id to have reference when hitting discord's endpoint,
+     * or if it had discord profile hooked up authenticate this user
+     *
+     * @param Request $request
+     * @return Redirect
+     */
     public function endpoint(Request $request)
     {
         try {
@@ -99,6 +131,15 @@ class LoginController extends Controller
         return redirect()->route('home');
     }
 
+    /**
+     * Discord's endpoint which checks if auth was successful,
+     * try to get from temp_user_id
+     * assign avatar, nickname and id from discord API
+     * and login the user
+     *
+     * @param Request $request
+     * @return Redirect
+     */
     public function endpointDiscord(Request $request)
     {
         try {

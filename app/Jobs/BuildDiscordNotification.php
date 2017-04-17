@@ -17,7 +17,7 @@ class BuildDiscordNotification implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * Create a new job instance.
+     * Create a new job instance with $match variable.
      *
      * @return void
      */
@@ -27,7 +27,7 @@ class BuildDiscordNotification implements ShouldQueue
     }
 
     /**
-     * Execute the job.
+     * Build up a discord notification and send it
      *
      * @return void
      */

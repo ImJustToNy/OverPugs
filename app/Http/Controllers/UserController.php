@@ -8,6 +8,12 @@ use OverPugs\User;
 
 class UserController extends Controller
 {
+    /**
+     * Push new prefered_region to user's database
+     *
+     * @param Request $request
+     * @return Response
+     */
     public function changeRegion(Request $request)
     {
         $this->validate($request, [

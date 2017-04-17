@@ -15,7 +15,7 @@ class DiscordServiceProvider extends ServiceProvider
     protected $defer = true;
 
     /**
-     * Register the application services.
+     * Register the discord service.
      *
      * @return void
      */
