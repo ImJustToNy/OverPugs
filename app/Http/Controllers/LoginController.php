@@ -111,7 +111,7 @@ class LoginController extends Controller
             }
 
             $user->{$region . '_profile'} = json_encode([
-                'rank' => $rank,
+                'rank' => intval($rank),
                 'avatar_url' => $portrait,
             ]);
         }

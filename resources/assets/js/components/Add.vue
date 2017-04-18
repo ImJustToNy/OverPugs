@@ -104,7 +104,7 @@
 
       minRank () {
         if (this.user) {
-          var rank = this.profile.rank - 500;
+          var rank = parseInt(this.profile.rank) - 500;
 
           if (rank < 1) {
             return 1;
@@ -118,7 +118,7 @@
 
       maxRank () {
         if (this.user) {
-          var rank = this.profile.rank + 500;
+          var rank = parseInt(this.profile.rank) + 500;
 
           if (rank > 5000) {
             rank -= rank - 5000;
