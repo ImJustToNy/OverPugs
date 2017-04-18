@@ -5,10 +5,10 @@ Echo = new Echo({
   key: window.overwatchLounge.pusherKey
 });
 
-// Raven
-//   .config('https://bc01834581ec4fc9b2069d8bce9cbded@sentry.io/149810')
-//   .addPlugin(RavenVue, Vue)
-//   .install();
+Raven
+  .config('https://bc01834581ec4fc9b2069d8bce9cbded@sentry.io/149810')
+  .addPlugin(RavenVue, Vue)
+  .install();
 
 Vue.use(Vuex);
 Vue.use(VueResource);
