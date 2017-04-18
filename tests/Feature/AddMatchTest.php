@@ -65,7 +65,7 @@ class AddMatchTest extends TestCase
 
         Queue::assertPushed(BuildDiscordNotification::class);
         Event::assertDispatched(NewMatch::class, function ($event) use ($match) {
-            return $match['match']['id'] == $event->match->id;
+            return $match['match']['id'] == $event->match['id'];
         });
 
         $refreshedMatch = $this->actingAs($this->user)
