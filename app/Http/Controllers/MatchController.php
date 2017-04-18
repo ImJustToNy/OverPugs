@@ -133,7 +133,7 @@ class MatchController extends Controller
         $match->expireAt = Carbon::now()->addMinutes(5);
 
         $request->user()->matches()->save($match);
-        $userMatch = $this->userMatch();
+        $userMatch = $this->userMatch()->toArray();
 
         event(new NewMatch($userMatch));
 
