@@ -119,11 +119,9 @@ class LoginController extends Controller
         $user->save();
 
         if (!$user->discord_id) {
-
             Session::put('temp_user_id', $user->id);
 
             return redirect()->route('loginDiscord');
-
         }
 
         Auth::login($user, true);
