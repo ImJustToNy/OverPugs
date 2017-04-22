@@ -20,7 +20,7 @@ class AddMatchTest extends TestCase
     private $user;
 
     /**
-     * Generate user and setup fake queue and event bus
+     * Generate user and setup fake queue and event bus.
      *
      * @return void
      */
@@ -39,7 +39,7 @@ class AddMatchTest extends TestCase
      * refreshing it,
      * trying to check it out
      * deleting it
-     * and editing discord message
+     * and editing discord message.
      *
      * @return void
      */
@@ -47,12 +47,12 @@ class AddMatchTest extends TestCase
     {
         $match = $this->actingAs($this->user)
             ->json('POST', '/api/match/add', [
-                'type' => 'comp',
-                'region' => 'us',
-                'languages' => ['pl', 'de'],
-                'howMuch' => 3,
-                'minRank' => $this->user->us_profile->rank - 100,
-                'maxRank' => $this->user->us_profile->rank + 100,
+                'type'           => 'comp',
+                'region'         => 'us',
+                'languages'      => ['pl', 'de'],
+                'howMuch'        => 3,
+                'minRank'        => $this->user->us_profile->rank - 100,
+                'maxRank'        => $this->user->us_profile->rank + 100,
                 'invitationLink' => 'https://discord.gg/overwatch',
             ])
             ->assertStatus(200)
@@ -73,7 +73,7 @@ class AddMatchTest extends TestCase
             ->assertStatus(200)
             ->assertJson([
                 'status' => 'ok',
-                'match' => [
+                'match'  => [
                     'expireAt' => Carbon::now()->addMinutes(5),
                 ],
             ])
@@ -83,7 +83,7 @@ class AddMatchTest extends TestCase
             return $refreshedMatch['match']['id'] == $event->match->id;
         });
 
-        $this->json('GET', '/match/' . $match['match']['id'])
+        $this->json('GET', '/match/'.$match['match']['id'])
             ->assertRedirect('/')
             ->assertSessionHas('match.id', $match['match']['id']);
 
@@ -101,7 +101,7 @@ class AddMatchTest extends TestCase
 
     /**
      * Trying to add quick play match without
-     * description (which is required) and expecting 422 (validation error)
+     * description (which is required) and expecting 422 (validation error).
      *
      * @return void
      */
@@ -109,10 +109,10 @@ class AddMatchTest extends TestCase
     {
         $this->actingAs($this->user)
             ->json('POST', '/api/match/add', [
-                'type' => 'qp',
-                'region' => 'us',
+                'type'      => 'qp',
+                'region'    => 'us',
                 'languages' => ['pl', 'de'],
-                'howMuch' => 3,
+                'howMuch'   => 3,
             ])
             ->assertStatus(422);
 

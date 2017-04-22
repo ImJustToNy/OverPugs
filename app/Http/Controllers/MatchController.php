@@ -15,7 +15,7 @@ use OverPugs\User;
 class MatchController extends Controller
 {
     /**
-     * Get all available (not expired) matches
+     * Get all available (not expired) matches.
      *
      * @return Response
      */
@@ -26,7 +26,7 @@ class MatchController extends Controller
 
     /**
      * Refresh existing match that belongs to user
-     * by adding 5 minutes to it's expire time
+     * by adding 5 minutes to it's expire time.
      *
      * @return Response
      */
@@ -45,15 +45,16 @@ class MatchController extends Controller
 
         return response()->json([
             'status' => 'ok',
-            'match' => $userMatch,
+            'match'  => $userMatch,
         ]);
     }
 
     /**
      * Remove match (not really) by setting it's expired time -10 minutes
-     * which removes it from being selected via getAvailable method
+     * which removes it from being selected via getAvailable method.
      *
      * @param Request $request
+     *
      * @return Response
      */
     public function deleteMatch(Request $request)
@@ -71,32 +72,33 @@ class MatchController extends Controller
     /**
      * Create a new match with data of user's request,
      * send new event (for real time integration)
-     * and deploy a queue job to create a discord notification
+     * and deploy a queue job to create a discord notification.
      *
      * @param Request $request
+     *
      * @return Response
      */
     public function addMatch(Request $request)
     {
         $this->validate($request, [
-            'region' => ['required', 'in:us,eu,kr'],
-            'minRank' => ['between:1,5000'],
-            'maxRank' => ['between:1,5000'],
-            'languages' => ['required', 'array', 'between:1,3'],
-            'howMuch' => ['required', 'between:1,5'],
+            'region'      => ['required', 'in:us,eu,kr'],
+            'minRank'     => ['between:1,5000'],
+            'maxRank'     => ['between:1,5000'],
+            'languages'   => ['required', 'array', 'between:1,3'],
+            'howMuch'     => ['required', 'between:1,5'],
             'description' => ['max:25'],
-            'type' => ['required', 'in:comp,qp,custom,brawl'],
+            'type'        => ['required', 'in:comp,qp,custom,brawl'],
         ]);
 
         if (isset($request->invitationLink) && !preg_match('/https?:\/\/discord\.gg\/[a-z0-9]{3,}/i', $request->invitationLink)) {
             return response()->json(['error' => 'This is not correct discord invitation link'], 422);
         }
 
-        if (is_null($request->user()->{$request->region . '_profile'})) {
+        if (is_null($request->user()->{$request->region.'_profile'})) {
             return response()->json(['error' => 'You can\'t create game on server where you have no profile'], 422);
         }
 
-        $profile = $request->user()->{$request->region . '_profile'};
+        $profile = $request->user()->{$request->region.'_profile'};
 
         if ($request->type == 'comp') {
             if ($request->minRank > $request->maxRank) {
@@ -120,7 +122,7 @@ class MatchController extends Controller
             return response()->json(['error' => 'You already have ongoing match'], 422);
         }
 
-        $match = new Match;
+        $match = new Match();
 
         $match->type = $request->type;
         $match->description = $request->description;
@@ -145,10 +147,11 @@ class MatchController extends Controller
     /**
      * Get match via id in url,
      * which you can get by clicking url in discord message
-     * or return 0 which will show an error message in frontend
+     * or return 0 which will show an error message in frontend.
      *
      * @param Request $request
-     * @param type $id
+     * @param type    $id
+     *
      * @return Response
      */
     public function getMatch(Request $request, $id)
@@ -163,7 +166,7 @@ class MatchController extends Controller
     }
 
     /**
-     * Get first user's match that is not expired
+     * Get first user's match that is not expired.
      *
      * @return Collection
      */

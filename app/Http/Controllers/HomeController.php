@@ -9,7 +9,7 @@ class HomeController extends Controller
     /**
      * Main page's controller
      * If user is logged in, hook up some informations that frontend needs
-     * or if it not, just send null to indicate that we are guest
+     * or if it not, just send null to indicate that we are guest.
      *
      * @return View
      */

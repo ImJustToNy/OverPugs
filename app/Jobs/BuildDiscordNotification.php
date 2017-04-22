@@ -27,7 +27,7 @@ class BuildDiscordNotification implements ShouldQueue
     }
 
     /**
-     * Build up a discord notification and send it
+     * Build up a discord notification and send it.
      *
      * @return void
      */
@@ -35,85 +35,85 @@ class BuildDiscordNotification implements ShouldQueue
     {
         $howMany = $this->match->howMuch;
 
-        $howMany = $howMany . str_repeat(' :person_frowning:', $howMany);
+        $howMany = $howMany.str_repeat(' :person_frowning:', $howMany);
 
         $games = [
-            'qp' => 'Quick Play',
-            'comp' => 'Competitive',
+            'qp'     => 'Quick Play',
+            'comp'   => 'Competitive',
             'custom' => 'Custom games',
-            'brawl' => 'Brawl',
+            'brawl'  => 'Brawl',
         ];
 
         $fields = [
             [
-                'name' => 'Region',
-                'value' => ':flag_' . $this->match->region . ': ' . strtoupper($this->match->region),
+                'name'   => 'Region',
+                'value'  => ':flag_'.$this->match->region.': '.strtoupper($this->match->region),
                 'inline' => true,
             ],
             [
-                'name' => 'Type',
-                'value' => $games[$this->match->type],
+                'name'   => 'Type',
+                'value'  => $games[$this->match->type],
                 'inline' => true,
             ],
             [
-                'name' => 'Languages',
-                'value' => strtoupper(implode(' ', $this->match->languages)),
+                'name'   => 'Languages',
+                'value'  => strtoupper(implode(' ', $this->match->languages)),
                 'inline' => true,
             ],
             [
-                'name' => 'How Many',
-                'value' => $howMany,
+                'name'   => 'How Many',
+                'value'  => $howMany,
                 'inline' => true,
             ],
         ];
 
         if ($this->match->type == 'comp') {
             $fields[] = [
-                'name' => 'Min Rank',
-                'value' => $this->match->minRank,
+                'name'   => 'Min Rank',
+                'value'  => $this->match->minRank,
                 'inline' => true,
             ];
             $fields[] = [
-                'name' => 'Max Rank',
-                'value' => $this->match->maxRank,
+                'name'   => 'Max Rank',
+                'value'  => $this->match->maxRank,
                 'inline' => true,
             ];
         } else {
             $fields[] = [
-                'name' => 'Description',
-                'value' => $this->match->description,
+                'name'   => 'Description',
+                'value'  => $this->match->description,
                 'inline' => true,
             ];
         }
 
         if ($this->match->invitationLink) {
             $fields[] = [
-                'name' => 'Invitation',
-                'value' => $this->match->invitationLink,
+                'name'   => 'Invitation',
+                'value'  => $this->match->invitationLink,
                 'inline' => true,
             ];
         }
 
         if (Auth::user()->discord_id) {
             $fields[] = [
-                'name' => 'Discord Tag',
-                'value' => '<@' . Auth::user()->discord_id . '>',
+                'name'   => 'Discord Tag',
+                'value'  => '<@'.Auth::user()->discord_id.'>',
                 'inline' => true,
             ];
         }
 
         $message = resolve('RestCord\DiscordClient')->channel->createMessage([
             'channel.id' => intval(env('DISCORD_CHANNELID')),
-            'content' => ':white_check_mark: Available',
-            'embed' => [
+            'content'    => ':white_check_mark: Available',
+            'embed'      => [
                 'title' => ':book: More details',
-                'url' => route('getMatch', $this->match->id),
+                'url'   => route('getMatch', $this->match->id),
                 'color' => 14290439,
 
                 'fields' => $fields,
                 'author' => [
-                    'name' => 'Want to create your own lobby? Click here!',
-                    'url' => route('home'),
+                    'name'     => 'Want to create your own lobby? Click here!',
+                    'url'      => route('home'),
                     'icon_url' => 'https://overwatchlounge.herokuapp.com/images/logo.png',
                 ],
             ],

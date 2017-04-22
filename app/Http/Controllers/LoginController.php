@@ -19,7 +19,7 @@ class LoginController extends Controller
     protected $redirectTo = '/';
 
     /**
-     * Register middleware rules
+     * Register middleware rules.
      *
      * @return void
      */
@@ -29,7 +29,7 @@ class LoginController extends Controller
     }
 
     /**
-     * Build socialite OAuth URL to authenticate via Battle.net
+     * Build socialite OAuth URL to authenticate via Battle.net.
      *
      * @return Battle.net OAuth URL
      */
@@ -40,7 +40,7 @@ class LoginController extends Controller
 
     /**
      * First, check if temp_user_id exists (it is being set while we are hitting battle.net's endpoint)
-     * if this is true, we will go to discord's OAuth URL
+     * if this is true, we will go to discord's OAuth URL.
      *
      * @return Discord OAuth URL
      */
@@ -54,7 +54,7 @@ class LoginController extends Controller
     }
 
     /**
-     * Drop user's session and redirect home
+     * Drop user's session and redirect home.
      *
      * @return Redirect home
      */
@@ -71,9 +71,10 @@ class LoginController extends Controller
      * create user and assign profile by scrapping playoverwatch.com,
      * if we don't have discord profile set up already,
      * set temp_user_id to have reference when hitting discord's endpoint,
-     * or if it had discord profile hooked up authenticate this user
+     * or if it had discord profile hooked up authenticate this user.
      *
      * @param Request $request
+     *
      * @return Redirect
      */
     public function endpoint(Request $request)
@@ -91,13 +92,13 @@ class LoginController extends Controller
         );
 
         foreach (['us', 'eu', 'kr'] as $region) {
-            $dom = new Dom;
-            $dom->load('https://playoverwatch.com/en-us/career/pc/' . $region . '/' . str_replace('#', '-', $user->tag));
+            $dom = new Dom();
+            $dom->load('https://playoverwatch.com/en-us/career/pc/'.$region.'/'.str_replace('#', '-', $user->tag));
 
             try {
                 $portrait = $dom->find('.player-portrait')->getAttribute('src');
             } catch (Exception $e) {
-                $user->{$region . '_profile'} = null;
+                $user->{$region.'_profile'} = null;
 
                 break;
             }
@@ -110,8 +111,8 @@ class LoginController extends Controller
                 $rank = 0;
             }
 
-            $user->{$region . '_profile'} = json_encode([
-                'rank' => intval($rank),
+            $user->{$region.'_profile'} = json_encode([
+                'rank'       => intval($rank),
                 'avatar_url' => $portrait,
             ]);
         }
@@ -133,9 +134,10 @@ class LoginController extends Controller
      * Discord's endpoint which checks if auth was successful,
      * try to get from temp_user_id
      * assign avatar, nickname and id from discord API
-     * and login the user
+     * and login the user.
      *
      * @param Request $request
+     *
      * @return Redirect
      */
     public function endpointDiscord(Request $request)

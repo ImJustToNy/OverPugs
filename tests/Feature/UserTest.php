@@ -11,7 +11,7 @@ class UserTest extends TestCase
     use DatabaseTransactions;
 
     /**
-     * Test changing regions
+     * Test changing regions.
      *
      * @return void
      */
@@ -29,7 +29,7 @@ class UserTest extends TestCase
             ]);
 
         $this->assertDatabaseHas('users', [
-            'id' => $user->id,
+            'id'              => $user->id,
             'prefered_region' => 'eu',
         ]);
     }

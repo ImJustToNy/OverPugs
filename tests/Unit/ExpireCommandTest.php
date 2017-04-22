@@ -9,7 +9,7 @@ use Tests\TestCase;
 class ExpireCommandTest extends TestCase
 {
     /**
-     * Creates new expired match and tires if discord message would be editted successfuly
+     * Creates new expired match and tires if discord message would be editted successfuly.
      *
      * @return void
      */
@@ -20,7 +20,7 @@ class ExpireCommandTest extends TestCase
         Artisan::call('schedule:run');
 
         $this->assertDatabaseHas('matches', [
-            'id' => $match->id,
+            'id'              => $match->id,
             'message_deleted' => true,
         ]);
     }

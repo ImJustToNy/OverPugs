@@ -137,7 +137,7 @@
           .listen('.OverPugs.Events.NewMatch', (e) => {
             var matches = this.matches;
             matches.push(e.match);
-          
+
             this.$store.dispatch('updateMatches', matches);
           })
           .listen('.OverPugs.Events.UpdateExpire', (e) => {
