@@ -11,6 +11,7 @@ use OverPugs\Events\UpdateExpire;
 use OverPugs\Jobs\BuildDiscordNotification;
 use OverPugs\Match;
 use OverPugs\User;
+use Snipe\BanBuilder\CensorWords;
 
 class MatchController extends Controller
 {
@@ -123,9 +124,10 @@ class MatchController extends Controller
         }
 
         $match = new Match();
+        $censor = new CensorWords;
 
         $match->type = $request->type;
-        $match->description = $request->description;
+        $match->description = $censor->censorString($request->description)['clean'];
         $match->region = $request->region;
         $match->languages = implode(',', $request->languages);
         $match->howMuch = $request->howMuch;
