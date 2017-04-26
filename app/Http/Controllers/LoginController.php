@@ -25,7 +25,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => ['logout']]);
+        $this->middleware('guest', ['except' => ['logout', 'loginDiscord']]);
     }
 
     /**
@@ -46,7 +46,7 @@ class LoginController extends Controller
      */
     public function loginDiscord()
     {
-        if (!Session::has('temp_user_id')) {
+        if (!Session::has('temp_user_id') && !Auth::check()) {
             return redirect()->route('login');
         }
 
@@ -93,12 +93,12 @@ class LoginController extends Controller
 
         foreach (['us', 'eu', 'kr'] as $region) {
             $dom = new Dom();
-            $dom->load('https://playoverwatch.com/en-us/career/pc/'.$region.'/'.str_replace('#', '-', $user->tag));
+            $dom->load('https://playoverwatch.com/en-us/career/pc/' . $region . '/' . str_replace('#', '-', $user->tag));
 
             try {
                 $portrait = $dom->find('.player-portrait')->getAttribute('src');
             } catch (Exception $e) {
-                $user->{$region.'_profile'} = null;
+                $user->{$region . '_profile'} = null;
 
                 break;
             }
@@ -111,8 +111,8 @@ class LoginController extends Controller
                 $rank = 0;
             }
 
-            $user->{$region.'_profile'} = json_encode([
-                'rank'       => intval($rank),
+            $user->{$region . '_profile'} = json_encode([
+                'rank' => intval($rank),
                 'avatar_url' => $portrait,
             ]);
         }
@@ -148,7 +148,13 @@ class LoginController extends Controller
             return redirect()->route('loginDiscord');
         }
 
-        $user = User::findOrFail(Session::get('temp_user_id'));
+        if (Auth::check()) {
+            $user = Auth::user();
+        } else if (Session::has('temp_user_id')) {
+            $user = User::findOrFail(Session::get('temp_user_id'));
+        } else {
+            return redirect()->route('loginDiscord');
+        }
 
         $user->discord_id = $profile->id;
         $user->discord_nickname = $profile->nickname;

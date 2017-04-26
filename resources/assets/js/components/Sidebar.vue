@@ -20,8 +20,14 @@
         <div class="item" v-if="user">
           <img v-bind:src="profile.avatar_url" alt="User's avatar" class="logo" v-if="profile"> {{ user.tag | friendlyTag }} 
         </div>
-        <div class="item" v-if="user">
-          <img v-bind:src="user.discord_avatar_url" class="logo" alt="Discord avatar"> {{ user.discord_nickname }}
+        <div class="ui dropdown item" v-if="user">
+          <img v-bind:src="user.discord_avatar_url" class="logo" alt="Discord avatar"> {{ user.discord_nickname }} <i class="dropdown icon"></i>
+          <div class="menu">
+            <a href="/login/discord" class="item">
+              <i class="icon refresh"></i>
+              <span class="text">Reconnect your discord account</span>
+            </a>
+          </div>
         </div>
         <div class="item" v-if="profile">
           <a href="/logout" class="ui icon button" data-tooltip="Logout" data-position="bottom center">
