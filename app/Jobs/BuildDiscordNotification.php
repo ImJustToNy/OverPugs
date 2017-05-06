@@ -114,7 +114,7 @@ class BuildDiscordNotification implements ShouldQueue
                 'author' => [
                     'name'     => 'Want to create your own lobby? Click here!',
                     'url'      => route('home'),
-                    'icon_url' => 'https://overwatchlounge.herokuapp.com/images/logo.png',
+                    'icon_url' => asset('images/logo.png'),
                 ],
             ],
         ]);
