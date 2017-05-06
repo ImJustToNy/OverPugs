@@ -12,8 +12,7 @@ class UserController extends Controller
      * Push new prefered_region to user's database.
      *
      * @param Request $request
-     *
-     * @return Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function changeRegion(Request $request)
     {

@@ -24,8 +24,6 @@ class LoginController extends Controller
 
     /**
      * Register middleware rules.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -36,7 +34,7 @@ class LoginController extends Controller
     /**
      * Build socialite OAuth URL to authenticate via Battle.net.
      *
-     * @return Battle.net OAuth URL
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function login()
     {
@@ -47,7 +45,7 @@ class LoginController extends Controller
      * First, check if temp_user_id exists (it is being set while we are hitting battle.net's endpoint)
      * if this is true, we will go to discord's OAuth URL.
      *
-     * @return Discord OAuth URL
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function loginDiscord()
     {
@@ -61,7 +59,7 @@ class LoginController extends Controller
     /**
      * Drop user's session and redirect home.
      *
-     * @return Redirect home
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function logout()
     {
@@ -80,7 +78,7 @@ class LoginController extends Controller
      *
      * @param Request $request
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function endpoint(Request $request)
     {
@@ -111,6 +109,12 @@ class LoginController extends Controller
         return redirect()->route('home');
     }
 
+    /**
+     * Trigger getProfile method on logged user
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function refreshProfile(Request $request)
     {
         $this->getProfile($request->user());
@@ -125,8 +129,7 @@ class LoginController extends Controller
      * and login the user.
      *
      * @param Request $request
-     *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function endpointDiscord(Request $request)
     {
