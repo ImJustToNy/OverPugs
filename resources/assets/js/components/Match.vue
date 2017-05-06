@@ -67,10 +67,10 @@
     },
 
     beforeMount () {
-      if (window.overwatchLounge.askedMatch == '0') {
+      if (OverPugs.askedMatch == '0') {
         this.error = 'No lobby like that found or it expired';
-      } else if (window.overwatchLounge.askedMatch != null) {
-        this.match = window.overwatchLounge.askedMatch;
+      } else if (OverPugs.askedMatch != null) {
+        this.match = OverPugs.askedMatch;
       }
     },
 

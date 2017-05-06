@@ -4,10 +4,10 @@ require('./bootstrap');
 
 Echo = new Echo({
     broadcaster: 'pusher',
-    key: window.overwatchLounge.pusherKey
+    key: OverPugs.pusherKey
 });
 
-Raven.config(window.overwatchLounge.sentry_dsn).addPlugin(RavenVue, Vue).install();
+Raven.config(OverPugs.sentry_dsn).addPlugin(RavenVue, Vue).install();
 
 Vue.use(Vuex);
 Vue.use(VueResource);
@@ -83,7 +83,7 @@ Vue.filter('badge', function (value, property) {
 
 Vue.http.options.root = '/api';
 Vue.http.options.headers = {
-    'X-CSRF-TOKEN': window.overwatchLounge.csrfToken,
+    'X-CSRF-TOKEN': OverPugs.csrfToken,
     'X-Requested-With': 'XMLHttpRequest'
 };
 
@@ -92,9 +92,9 @@ new Vue({
     store: new Vuex.Store({
         state: {
             loading: true,
-            user: window.overwatchLounge.user,
-            profile: window.overwatchLounge.user ? window.overwatchLounge.user[window.overwatchLounge.user.prefered_region + '_profile'] : null,
-            region: window.overwatchLounge.user ? window.overwatchLounge.user.prefered_region : 'us',
+            user: OverPugs.user,
+            profile: OverPugs.user ? OverPugs.user[OverPugs.user.prefered_region + '_profile'] : null,
+            region: OverPugs.user ? OverPugs.user.prefered_region : 'us',
             userMatch: null,
             matches: []
         },

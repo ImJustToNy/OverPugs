@@ -11,7 +11,7 @@
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
         <script>
-            window.overwatchLounge = {!! json_encode([
+            window.OverPugs = {!! json_encode([
                 'csrfToken' => csrf_token(),
                 'sentry_dsn' => env('SENTRY_PUBLIC_DSN'),
                 'pusherKey' => config('broadcasting.connections.pusher.key'),
