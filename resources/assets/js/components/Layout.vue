@@ -3,7 +3,7 @@
     <loading></loading>
 
     <navbar></navbar>
-    
+
     <gamelist></gamelist>
 
     <match></match>

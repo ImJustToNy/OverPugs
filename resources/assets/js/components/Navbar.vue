@@ -17,8 +17,14 @@
             <a class="item" v-on:click="switchRegion('kr')"><i class="flag kr"></i> Korea</a>
           </div>
         </div>
-        <div class="item" v-if="user">
-          <img v-bind:src="profile.avatar_url" alt="User's avatar" class="logo" v-if="profile"> {{ user.tag | friendlyTag }} 
+        <div class="ui dropdown item" v-if="user">
+          <img v-bind:src="profile.avatar_url" class="logo" alt="User's avatar" v-if="profile"> {{ user.tag | friendlyTag }} <i class="dropdown icon"></i>
+          <div class="menu">
+            <a href="/refreshProfile" class="item">
+              <i class="icon refresh"></i>
+              <span class="text">Refresh your rank</span>
+            </a>
+          </div>
         </div>
         <div class="ui dropdown item" v-if="user">
           <img v-bind:src="user.discord_avatar_url" class="logo" alt="Discord avatar"> {{ user.discord_nickname }} <i class="dropdown icon"></i>
