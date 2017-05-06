@@ -16,7 +16,7 @@ Vue.use(VueResource);
 Vue.component('layout', require('./components/Layout'));
 Vue.component('loading', require('./components/Loading'));
 Vue.component('add', require('./components/Add'));
-Vue.component('sidebar', require('./components/Sidebar'));
+Vue.component('navbar', require('./components/Navbar'));
 Vue.component('gamelist', require('./components/Gamelist'));
 Vue.component('match', require('./components/Match'));
 Vue.component('adsense', require('./components/AdSense'));

@@ -2,7 +2,7 @@
   <div class="ui container">
     <loading></loading>
 
-    <sidebar></sidebar>
+    <navbar></navbar>
 
     <adsense adslot="2483464796"></adsense>
 
