@@ -13,6 +13,7 @@
         <script>
             window.overwatchLounge = {!! json_encode([
                 'csrfToken' => csrf_token(),
+                'sentry_dsn' => env('SENTRY_PUBLIC_DSN'),
                 'pusherKey' => config('broadcasting.connections.pusher.key'),
                 'user' => $user,
                 'askedMatch' => session('match')
