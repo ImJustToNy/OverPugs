@@ -97,6 +97,8 @@ class LoginController extends Controller
 
             try {
                 $portrait = $dom->find('.player-portrait')->getAttribute('src');
+
+                $user->prefered_region = $region;
             } catch (Exception $e) {
                 $user->{$region.'_profile'} = null;
 
