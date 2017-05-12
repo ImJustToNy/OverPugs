@@ -27,18 +27,18 @@
             <div class="ui mini input">
               <select class="ui search dropdown" v-model="filter.languages" multiple="">
                 <option value="">Languages</option>
-                <option value="us"><i class="flag us"></i> English</option>
-                <option value="de"><i class="flag de"></i> German</option>
-                <option value="pl"><i class="flag pl"></i> Polish</option>
-                <option value="fr"><i class="flag fr"></i> French</option>
+                <option v-bind:value="key" v-for="(language, key) in languages">
+                  <i class="flag" v-bind:class="key"></i> {{ language }}
+                </option>
               </select>
             </div>
           </td>
           <td>
             <select class="ui dropdown" v-model="filter.howMuch">
               <option value="0">Player count</option>
-              <option v-bind:value="loop" v-for="loop in 5">
-                {{ loop }}
+              <option v-bind:value="loop" v-for="loop in 11">
+                <i class="icon user"></i>
+                {{ loop | pluralize('player') }}
               </option>
             </select>
           </td>
@@ -71,8 +71,8 @@
             <a class="ui label" v-for="language in game.languages"><i class="flag" v-bind:class="language"></i> {{ language | toUpperCase }}</a>
           </td>
           <td>
-            <i class="icon user" v-for="howMuch in game.howMuch"></i>
-            <i class="icon user outline" v-for="howMuch in 5 - game.howMuch"></i>
+            <i class="icon user"></i>
+            {{ game.howMuch | pluralize('player') }}
           </td>
           <td>
             <div class="ui circular button icon" v-on:click="openDiscord(game)" v-if="game.invitationLink" data-tooltip="Connect to discord">
@@ -122,8 +122,9 @@
           rank: 0,
           languages: [],
           howMuch: 0,
-          discord: 'not'
-        }
+          discord: 'not',
+        },
+        languages: OverPugs.languages
       }
     },
 

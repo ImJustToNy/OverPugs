@@ -48,9 +48,8 @@
             <div class="field">
               <label>How many people do you need?</label>
               <select class="ui fluid dropdown" name="howMuch">
-                <option v-bind:value="loop" v-for="loop in 5">
+                <option v-bind:value="loop" v-for="loop in (type == 'custom' ? 11 : 5)">
                   <i class="icon user" v-for="nextLoop in loop"></i>
-                  <i class="icon user outline" v-for="lastLoop in 5 - loop"></i>
                   {{ loop | pluralize('player') }}
                 </option>
               </select>
@@ -58,10 +57,10 @@
             <div class="field">
               <label>Accepted languages</label>
               <select class="ui fluid search dropdown" name="languages" multiple="">
-                <option value="us" selected><i class="flag us"></i> English</option>
-                <option value="de"><i class="flag de"></i> German</option>
-                <option value="pl"><i class="flag pl"></i> Polish</option>
-                <option value="fr"><i class="flag fr"></i> French</option>
+                <option value="gb" selected><i class="flag gb"></i> English</option>
+                <option v-bind:value="key" v-for="(language, key) in languages" v-if="key != 'gb'">
+                  <i class="flag" v-bind:class="key"></i> {{ language }}
+                </option>
               </select>
             </div>
           </div>
@@ -85,7 +84,8 @@
       return {
         formSubmitting: false,
         error: '',
-        type: 'comp'
+        type: 'comp',
+        languages: OverPugs.languages
       }
     },
 

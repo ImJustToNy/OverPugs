@@ -86,7 +86,7 @@ class MatchController extends Controller
             'minRank'     => ['between:1,5000'],
             'maxRank'     => ['between:1,5000'],
             'languages'   => ['required', 'array', 'between:1,3'],
-            'howMuch'     => ['required', 'between:1,5'],
+            'howMuch'     => ['required', 'between:1,11'],
             'description' => ['max:25'],
             'type'        => ['required', 'in:comp,qp,custom,brawl'],
         ]);
