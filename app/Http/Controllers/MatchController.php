@@ -46,7 +46,7 @@ class MatchController extends Controller
 
         return response()->json([
             'status' => 'ok',
-            'match'  => $userMatch,
+            'match' => $userMatch
         ]);
     }
 

@@ -12,7 +12,7 @@ class UpdateExpire implements ShouldBroadcast
 {
     public $match;
 
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, InteractsWithSockets;
 
     /**
      * Create a new event instance.

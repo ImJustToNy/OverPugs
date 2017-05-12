@@ -10,7 +10,7 @@
           </td>
           <td>
             <select class="ui fluid dropdown" v-model="filter.type">
-              <option value="not"><a class="ui mini label">Not selected</a></option>
+              <option value="not"><a class="ui mini label">Game type</a></option>
               <option value="comp"><a class="ui mini red label">Competitive</a></option>
               <option value="qp"><a class="ui mini green label">Quick Play</a></option>
               <option value="custom"><a class="ui mini blue label">Custom games</a></option>
