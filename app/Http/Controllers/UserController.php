@@ -8,6 +8,11 @@ use OverPugs\User;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Push new prefered_region to user's database.
      *
@@ -29,5 +34,18 @@ class UserController extends Controller
         return response()->json([
             'status' => 'ok',
         ]);
+    }
+
+    /**
+     * Trigger getProfile method on logged user
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function refreshProfile(Request $request)
+    {
+        Auth::user()->getProfile();
+
+        return redirect()->route('home');
     }
 }

@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
-use OverPugs\Http\Controllers\Controller;
 use OverPugs\User;
-use PHPHtmlParser\Dom;
 
 /**
  * Class LoginController
@@ -27,8 +25,8 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['refreshProfile']]);
-        $this->middleware('guest', ['except' => ['logout', 'loginDiscord', 'endpointDiscord']]);
+        $this->middleware('auth')->only('refreshProfile');
+        $this->middleware('guest')->except(['logout', 'loginDiscord', 'endpointDiscord']);
     }
 
     /**
@@ -94,9 +92,7 @@ class LoginController extends Controller
             ]
         );
 
-        $this->getProfile($user);
-
-        $user->save();
+        $user->getProfile();
 
         if (!$user->discord_id) {
             Session::put('temp_user_id', $user->id);
@@ -105,19 +101,6 @@ class LoginController extends Controller
         }
 
         Auth::login($user, true);
-
-        return redirect()->route('home');
-    }
-
-    /**
-     * Trigger getProfile method on logged user
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function refreshProfile(Request $request)
-    {
-        $this->getProfile($request->user());
 
         return redirect()->route('home');
     }
@@ -156,43 +139,5 @@ class LoginController extends Controller
         Auth::login($user, true);
 
         return redirect()->route('home');
-    }
-
-
-    /**
-     * Download all nessesary informations about specific battlenet profile
-     *
-     * @param User $user
-     * @return void
-     */
-    private function getProfile(User $user)
-    {
-        foreach (['us', 'eu', 'kr'] as $region) {
-            $dom = new Dom();
-            $dom->load('https://playoverwatch.com/en-us/career/pc/'.$region.'/'.str_replace('#', '-', $user->tag));
-
-            try {
-                $portrait = $dom->find('.player-portrait')->getAttribute('src');
-
-                $user->prefered_region = $region;
-            } catch (Exception $e) {
-                $user->{$region.'_profile'} = null;
-
-                break;
-            }
-
-            $rank_wrapper = $dom->find('.competitive-rank', 0);
-
-            if (!is_null($rank_wrapper)) {
-                $rank = $rank_wrapper->find('.h6', 0)->text;
-            } else {
-                $rank = 0;
-            }
-
-            $user->{$region.'_profile'} = json_encode([
-                'rank'       => intval($rank),
-                'avatar_url' => $portrait,
-            ]);
-        }
     }
 }

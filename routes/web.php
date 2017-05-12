@@ -13,7 +13,7 @@
 
 Route::get('/', 'HomeController@home')->name('home');
 
-Route::get('refreshProfile', 'LoginController@refreshProfile');
+Route::get('refreshProfile', 'UserController@refreshProfile');
 
 Route::get('match/{id}', 'MatchController@getMatch')->name('getMatch');
 
