@@ -20,7 +20,7 @@
           <td>
             <div class="ui icon input">
               <input type="number" placeholder="Rank" min="0" max="5000" v-model="filter.rank">
-              <i class="circular user link icon" v-if="profile" v-on:click="grabProfileRank"></i>
+              <i class="circular paste link icon" v-if="profile" v-on:click="grabProfileRank"></i>
             </div>
           </td>
           <td>
@@ -36,7 +36,7 @@
           </td>
           <td>
             <select class="ui dropdown" v-model="filter.howMuch">
-              <option value="0">Not selected</option>
+              <option value="0">Player count</option>
               <option v-bind:value="loop" v-for="loop in 5">
                 {{ loop }}
               </option>
@@ -44,7 +44,7 @@
           </td>
           <td>
             <select class="ui mini fluid dropdown" v-model="filter.discord">
-              <option value="not">Not selected</option>
+              <option value="not">Discord?</option>
               <option value="true">With discord</option>
               <option value="false">Without discord</option>
             </select>
