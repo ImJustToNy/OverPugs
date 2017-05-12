@@ -35,7 +35,7 @@
             </a>
           </div>
         </div>
-        <div class="item" v-if="profile">
+        <div class="item" v-if="user">
           <a href="/logout" class="ui icon button" data-tooltip="Logout" data-position="bottom center">
             <i class="icon sign out"></i>
           </a>
