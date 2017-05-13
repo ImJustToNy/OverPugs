@@ -10,7 +10,7 @@
           <tbody>
             <tr>
               <td>
-                <img class="ui avatar image" v-bind:src="match.user[match.region + '_profile'].avatar_url"> {{ match.user.tag | friendlyTag }}
+                <img class="ui avatar image" v-bind:src="match.user.avatar_url"> {{ match.user.tag | friendlyTag }}
               </td>
               <td>
                 <a class="ui mini label" v-bind:class="match.type | badge('color')">{{ match.type | badge('name') }}</a>
