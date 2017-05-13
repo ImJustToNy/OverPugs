@@ -93,7 +93,8 @@ new Vue({
         state: {
             loading: true,
             user: OverPugs.user,
-            profile: OverPugs.user ? OverPugs.user[OverPugs.user.prefered_region + '_profile'] : null,
+            avatar_url: OverPugs.user ? OverPugs.user.avatar_url : null,
+            rank: OverPugs.user ? OverPugs.user.rank : null,
             region: OverPugs.user ? OverPugs.user.prefered_region : 'us',
             userMatch: null,
             matches: []

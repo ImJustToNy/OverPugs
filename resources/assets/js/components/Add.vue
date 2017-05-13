@@ -1,5 +1,5 @@
 <template>
-  <div class="ui modal addModal" v-if="user && profile">
+  <div class="ui modal addModal" v-if="user">
     <i class="close icon"></i>
     <div class="header">
       Create new match
@@ -94,8 +94,12 @@
         return this.$store.state.user
       },
 
-      profile () {
-        return this.$store.state.profile
+      avatar_url () {
+        return this.$store.state.avatar_url
+      },
+
+      rank () {
+        return this.$store.state.rank
       },
 
       region () {
@@ -104,7 +108,7 @@
 
       minRank () {
         if (this.user) {
-          var rank = parseInt(this.profile.rank) - 500;
+          var rank = parseInt(this.rank) - 500;
 
           if (rank < 1) {
             return 1;
@@ -118,7 +122,7 @@
 
       maxRank () {
         if (this.user) {
-          var rank = parseInt(this.profile.rank) + 500;
+          var rank = parseInt(this.rank) + 500;
 
           if (rank > 5000) {
             rank -= rank - 5000;

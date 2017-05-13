@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="ui dropdown item" v-if="user">
-          <img v-bind:src="profile.avatar_url" class="logo" alt="User's avatar" v-if="profile"> {{ user.tag | friendlyTag }} <i class="dropdown icon"></i>
+          <img v-bind:src="avatar_url" class="logo" alt="User's avatar"> {{ user.tag | friendlyTag }} <i class="dropdown icon"></i>
           <div class="menu">
             <a href="/refreshProfile" class="item">
               <i class="icon refresh"></i>
@@ -40,8 +40,8 @@
             <i class="icon sign out"></i>
           </a>
         </div>
-        <div class="item" v-if="profile">
-          <img v-bind:src="profile.rank | imageRank" alt="User's rank"> {{ profile.rank }}
+        <div class="item">
+          <img v-bind:src="rank | imageRank" alt="User's rank"> {{ rank }}
         </div>
         <div class="item">
           <div v-if="!user" class="ui blue button" v-on:click="redirectToLogin"><i class="icon sign in"></i> Login</div>
@@ -75,8 +75,12 @@
         return this.$store.state.userMatch
       },
 
-      profile () {
-        return this.$store.state.profile
+      rank () {
+        return this.$store.state.rank
+      },
+
+      avatar_url () {
+        return this.$store.state.avatar_url
       }
     },
 
