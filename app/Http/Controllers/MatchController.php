@@ -4,6 +4,7 @@ namespace OverPugs\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use OverPugs\Events\DeleteMatch;
 use OverPugs\Events\NewMatch;
@@ -66,6 +67,8 @@ class MatchController extends Controller
         $match->save();
 
         event(new DeleteMatch($match->id));
+
+        Artisan::call('discord:expired');
 
         return response()->json(['status' => 'ok']);
     }
