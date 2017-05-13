@@ -40,7 +40,7 @@
             <i class="icon sign out"></i>
           </a>
         </div>
-        <div class="item">
+        <div class="item" v-if="user">
           <img v-bind:src="rank | imageRank" alt="User's rank"> {{ rank }}
         </div>
         <div class="item">
