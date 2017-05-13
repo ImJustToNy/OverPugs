@@ -47,33 +47,39 @@ class User extends Authenticatable
      */
     public function getProfile()
     {
+        $played = $portrait = $rank = [];
+
         foreach (['us', 'eu', 'kr'] as $region) {
             $dom = new Dom();
             $dom->load('https://playoverwatch.com/en-us/career/pc/'.$region.'/'.str_replace('#', '-', $this->tag));
 
             try {
-                $portrait = $dom->find('.player-portrait')->getAttribute('src');
-
-                $this->prefered_region = $region;
+                $portrait[$region] = $dom->find('.player-portrait')->getAttribute('src');
             } catch (Exception $e) {
-                $this->{$region.'_profile'} = null;
-
                 break;
             }
 
             $rank_wrapper = $dom->find('.competitive-rank', 0);
 
             if (!is_null($rank_wrapper)) {
-                $rank = $rank_wrapper->find('.h6', 0)->text;
+                $rank[$region] = $rank_wrapper->find('.h6', 0)->text;
             } else {
-                $rank = 0;
+                $rank[$region] = 0;
             }
 
-            $this->{$region.'_profile'} = json_encode([
-                'rank'       => intval($rank),
-                'avatar_url' => $portrait,
-            ]);
+            foreach ($dom->find('td') as $line) {
+                if ($line->text == 'Games Played') {
+                    $played[$region] = $line->nextSibling()->text;
+                    break; // Getting first one
+                }
+            }
         }
+
+        $newest_region = array_search(max($played), $played);
+
+        $this->avatar_url = $portrait[$newest_region];
+        $this->rank = $rank[$newest_region];
+        $this->prefered_region = $newest_region;
 
         $this->save();
     }
