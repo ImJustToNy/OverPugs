@@ -15,8 +15,8 @@ class RefactorProfileToOne extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn(['us_profile', 'eu_profile', 'kr_profile']);
-            $table->string('avatar_url');
-            $table->integer('rank');
+            $table->string('avatar_url')->nullable();
+            $table->integer('rank')->nullable();
         });
     }
 
