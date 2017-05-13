@@ -95,12 +95,6 @@ class MatchController extends Controller
             return response()->json(['error' => 'This is not correct discord invitation link'], 422);
         }
 
-        if (is_null($request->user()->{$request->region.'_profile'})) {
-            return response()->json(['error' => 'You can\'t create game on server where you have no profile'], 422);
-        }
-
-        $profile = $request->user()->{$request->region.'_profile'};
-
         if ($request->type == 'comp') {
             if ($request->minRank > $request->maxRank) {
                 return response()->json(['error' => 'Minimum rank must be smaller than Maximum rank'], 422);
@@ -110,7 +104,7 @@ class MatchController extends Controller
                 return response()->json(['error' => 'You must specify Minimum rank and Maximum rank'], 422);
             }
 
-            if ($request->minRank < $profile->rank - 1000 || $request->maxRank < $profile->rank - 1000) {
+            if ($request->minRank < $request->user()->rank - 1000 || $request->maxRank < $request->user()->rank - 1000) {
                 return response()->json(['error' => 'Mininmum rank and Maximum rank should be in 1000 points range'], 422);
             }
         } else {

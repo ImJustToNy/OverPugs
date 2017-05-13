@@ -20,7 +20,7 @@
           <td>
             <div class="ui icon input">
               <input type="number" placeholder="Rank" min="0" max="5000" v-model="filter.rank">
-              <i class="circular paste link icon" v-if="profile" v-on:click="grabProfileRank"></i>
+              <i class="circular paste link icon" v-if="rank" v-on:click="grabProfileRank"></i>
             </div>
           </td>
           <td>
@@ -54,7 +54,7 @@
       <tbody>
         <tr v-for="game in matches" v-show="game.region == region" v-bind:class="{ warning: user && (game.user.tag == user.tag) }" v-if="check(game)">
           <td>
-            <img class="ui avatar image" v-bind:src="game.user[game.region + '_profile'].avatar_url">{{ game.user.tag | friendlyTag }}
+            <img class="ui avatar image" v-bind:src="game.user.avatar_url">{{ game.user.tag | friendlyTag }}
           </td>
           <td>
             <a class="ui mini label" v-bind:class="game.type | badge('color')">{{ game.type | badge('name') }}</a>
@@ -105,8 +105,8 @@
         return this.$store.state.user
       },
 
-      profile () {
-        return this.$store.state.profile
+      rank () {
+        return this.$store.state.rank
       },
 
       matches () {
@@ -222,7 +222,7 @@
       },
 
       grabProfileRank: function () {
-        this.filter.rank = this.profile.rank;
+        this.filter.rank = this.rank;
       }
     },
 
