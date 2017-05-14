@@ -8,9 +8,6 @@
           by <a href="mailto:imtony@protonmail.com">ToNy</a>
         </div>
       </div>
-      <div class="item">
-        {{ online }} <i class="icon user"></i>
-      </div>
       <div class="right green menu">
         <div class="ui dropdown item">
           <i class="flag" v-bind:class="region"></i> {{ region | toUpperCase }} <i class="dropdown icon"></i>
