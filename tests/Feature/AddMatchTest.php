@@ -51,8 +51,8 @@ class AddMatchTest extends TestCase
                 'region'         => 'us',
                 'languages'      => ['pl', 'de'],
                 'howMuch'        => 3,
-                'minRank'        => $this->user->us_profile->rank - 100,
-                'maxRank'        => $this->user->us_profile->rank + 100,
+                'minRank'        => $this->user->rank - 100,
+                'maxRank'        => $this->user->rank + 100,
                 'invitationLink' => 'https://discord.gg/overwatch',
             ])
             ->assertStatus(200)
@@ -72,16 +72,11 @@ class AddMatchTest extends TestCase
             ->json('POST', '/api/match/refresh')
             ->assertStatus(200)
             ->assertJson([
-                'status' => 'ok',
-                'match'  => [
-                    'expireAt' => Carbon::now()->addMinutes(5),
-                ],
+                'status' => 'too fast'
             ])
             ->decodeResponseJson();
 
-        Event::assertDispatched(UpdateExpire::class, function ($event) use ($refreshedMatch) {
-            return $refreshedMatch['match']['id'] == $event->match->id;
-        });
+        Event::assertNotDispatched(UpdateExpire::class);
 
         $this->json('GET', '/match/'.$match['match']['id'])
             ->assertRedirect('/')
