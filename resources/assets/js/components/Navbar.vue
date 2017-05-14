@@ -118,19 +118,28 @@
       },
 
       deleteMatch: function (event) {
+        this.$store.dispatch('switchLoading', true)
+
         this.$http.post('match/delete')
           .then(response => {}, response => {
             $(event.target).transition('shake');
-          })
+          }).then(() => {
+            this.$store.dispatch('switchLoading', false)
+          }
+        )
       },
 
       refreshMatch: function (event) {
         this.canRefresh = false;
+        this.$store.dispatch('switchLoading', true);
 
         this.$http.post('match/refresh')
           .then(response => {}, response => {
             $(event.target).transition('shake');
-          })
+          }).then(() => {
+            this.$store.dispatch('switchLoading', false)
+          }
+        )
       },
 
       switchRegion: function (region) {
