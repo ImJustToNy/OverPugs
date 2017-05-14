@@ -35,6 +35,14 @@ class MatchController extends Controller
     public function refreshMatch()
     {
         $match = $this->userMatch();
+
+        if (Carbon::now()->diffInSeconds(new Carbon($match->expireAt)) > 180) {
+            return response()->json([
+               'status' => 'too fast',
+               'match' => $match
+            ]);
+        }
+
         $expireAt = Carbon::now()->addMinutes(5);
 
         $match->expireAt = $expireAt;
