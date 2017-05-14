@@ -46,6 +46,9 @@ class UserController extends Controller
     {
         Auth::user()->getProfile();
 
-        return redirect()->route('home');
+        return response()->json([
+            'rank' => Auth::user()->rank,
+            'avatar_url' => Auth::user()->avatar_url
+        ]);
     }
 }

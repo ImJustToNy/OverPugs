@@ -102,29 +102,29 @@ new Vue({
         },
 
         actions: {
-            switchLoading: function switchLoading(_ref, condition) {
-                var commit = _ref.commit;
-
+            switchLoading({ commit }, condition) {
                 commit('SWITCH_LOADING', condition);
             },
-            changeRegion: function changeRegion(_ref2, condition) {
-                var commit = _ref2.commit;
 
+            changeRegion({ commit }, condition) {
                 commit('CHANGE_REGION', condition);
             },
-            updateMatches: function updateMatches(_ref3) {
-                var commit = _ref3.commit;
-                var condition = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
+            updateMatches({ commit }, condition = null) {
                 commit('UPDATE_MATCHES', condition);
+            },
+
+            updateProfile({ commit }, condition) {
+                commit('UPDATE_PROFILE', condition);
             }
         },
 
         mutations: {
-            SWITCH_LOADING: function SWITCH_LOADING(state, condition) {
+            SWITCH_LOADING(state, condition) {
                 state.loading = condition;
             },
-            CHANGE_REGION: function CHANGE_REGION(state, condition) {
+
+            CHANGE_REGION(state, condition) {
                 state.region = condition;
 
                 if (state.user) {
@@ -135,7 +135,8 @@ new Vue({
                     });
                 }
             },
-            UPDATE_MATCHES: function UPDATE_MATCHES(state, condition) {
+
+            UPDATE_MATCHES(state, condition) {
                 if (condition == null) {
                     condition = state.matches;
                 }
@@ -151,6 +152,11 @@ new Vue({
                 });
 
                 state.matches = condition;
+            },
+
+            UPDATE_PROFILE(state, condition) {
+                state.rank = condition.rank;
+                state.avatar_url = condition.avatar_url;
             }
         }
     })

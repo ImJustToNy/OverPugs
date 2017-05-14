@@ -20,7 +20,7 @@
         <div class="ui dropdown item" v-if="user">
           <img v-bind:src="avatar_url" class="logo" alt="User's avatar"> {{ user.tag | friendlyTag }} <i class="dropdown icon"></i>
           <div class="menu">
-            <a href="/refreshProfile" class="item">
+            <a v-on:click="refreshProfile" class="item">
               <i class="icon refresh"></i>
               <span class="text">Refresh your rank</span>
             </a>
@@ -158,6 +158,18 @@
 
       redirectToLogin: function () {
         window.location.href = '/login';
+      },
+
+      refreshProfile: function () {
+        this.$store.dispatch('switchLoading', true);
+
+        this.$http.post('refreshProfile')
+          .then(response => {
+            this.$store.dispatch('updateProfile', response.data)
+          })
+          .then(() => {
+            this.$store.dispatch('switchLoading', false);
+          })
       }
     }
   }

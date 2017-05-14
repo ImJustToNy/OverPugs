@@ -13,13 +13,12 @@
 
 Route::get('/', 'HomeController@home')->name('home');
 
-Route::get('refreshProfile', 'UserController@refreshProfile');
-
 Route::get('match/{id}', 'MatchController@getMatch')->name('getMatch');
 
 Route::group(['prefix' => 'api'], function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::post('changeRegion', 'UserController@changeRegion');
+        Route::post('refreshProfile', 'UserController@refreshProfile');
 
         Route::group(['prefix' => 'match'], function () {
             Route::post('add', 'MatchController@addMatch');
