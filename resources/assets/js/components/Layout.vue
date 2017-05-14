@@ -6,7 +6,7 @@
 
     <gamelist></gamelist>
 
-    <match></match>
+    <game></game>
 
     <add></add>
   </div>
