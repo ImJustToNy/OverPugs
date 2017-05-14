@@ -4,7 +4,8 @@ require('./bootstrap');
 
 Echo = new Echo({
     broadcaster: 'pusher',
-    key: OverPugs.pusherKey
+    key: OverPugs.pusherKey,
+    namespace: 'OverPugs.Events'
 });
 
 Raven.config(OverPugs.sentry_dsn).addPlugin(RavenVue, Vue).install();

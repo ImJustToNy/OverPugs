@@ -135,13 +135,13 @@
 
       setupMatchRefresher: function () {
         Echo.channel('matches')
-          .listen('.OverPugs.Events.NewMatch', (e) => {
+          .listen('NewMatch', (e) => {
             var matches = this.matches;
             matches.push(e.match);
 
             this.$store.dispatch('updateMatches', matches);
           })
-          .listen('.OverPugs.Events.UpdateExpire', (e) => {
+          .listen('UpdateExpire', (e) => {
             var matches = this.matches;
 
             matches.forEach(function (item, key) {
@@ -152,7 +152,7 @@
 
             this.$store.dispatch('updateMatches', matches);
           })
-          .listen('.OverPugs.Events.DeleteMatch', (e) => {
+          .listen('DeleteMatch', (e) => {
             var matches = this.matches;
 
             matches.forEach(function (item, key) {
