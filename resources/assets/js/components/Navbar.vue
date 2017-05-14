@@ -5,8 +5,11 @@
         <img class="logo" src="/images/logo.png" width="128">
         OverPugs
         <div class="ui left pointing red basic label">
-          Made with <i class="icon red heart nomargin"></i> by <a href="mailto:imtony@protonmail.com">ToNy</a>
+          by <a href="mailto:imtony@protonmail.com">ToNy</a>
         </div>
+      </div>
+      <div class="item">
+        {{ online }} <i class="icon user"></i>
       </div>
       <div class="right green menu">
         <div class="ui dropdown item">
@@ -44,7 +47,7 @@
           <img v-bind:src="rank | imageRank" alt="User's rank"> {{ rank }}
         </div>
         <div class="item">
-          <div v-if="!user" class="ui blue button" v-on:click="redirectToLogin"><i class="icon sign in"></i> Login</div>
+          <a v-if="!user" href="/login" class="ui blue button"><i class="icon sign in"></i> Login</a>
           <div v-if="!userMatch && user" class="ui green button" v-on:click="openAddModal"><i class="icon plus"></i> Add new game</div>
           <div v-if="user && userMatch">Expires in <b>{{ diff | formatSeconds }}</b>
             <div class="ui mini compact blue icon button" v-on:click="refreshMatch($event)" v-if="diff <= 180" data-tooltip="Refresh your match" data-position="bottom center">
@@ -94,7 +97,8 @@
     data () {
       return {
         diff: 0,
-        canRefresh: false
+        canRefresh: false,
+        online: 0
       }
     },
 
@@ -154,10 +158,6 @@
           
           closable: false
         }).modal('show');
-      },
-
-      redirectToLogin: function () {
-        window.location.href = '/login';
       },
 
       refreshProfile: function () {
