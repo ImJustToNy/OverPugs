@@ -25,21 +25,6 @@ class User extends Authenticatable
         return strtolower($value);
     }
 
-    public function getUsProfileAttribute($value)
-    {
-        return json_decode($value);
-    }
-
-    public function getEuProfileAttribute($value)
-    {
-        return json_decode($value);
-    }
-
-    public function getKrProfileAttribute($value)
-    {
-        return json_decode($value);
-    }
-
     /**
      * Download all nessesary informations about specific battlenet profile
      *
