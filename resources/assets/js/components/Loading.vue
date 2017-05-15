@@ -1,7 +1,9 @@
 <template>
 
   <div class="ui active dimmer" v-if="isLoading">
-    <div class="ui loader"></div>
+    <div class="ui text loader">
+      Loading...
+    </div>
   </div>
 
 </template>
