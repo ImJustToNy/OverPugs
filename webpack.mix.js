@@ -1,4 +1,5 @@
 const { mix } = require('laravel-mix');
+const webpack = require('webpack');
 
 /*
  |--------------------------------------------------------------------------
@@ -18,6 +19,11 @@ mix
     .sass('resources/assets/sass/app.scss', 'public/css')
     .version()
     .options({
+        plugins: [
+          new webpack.DefinePlugin({
+            'debug': !mix.config.inProduction
+          })
+        ],
         uglify: {
           compress: {
             drop_console: false

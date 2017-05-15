@@ -16,7 +16,7 @@
         </td>
         <td>
             <a class="ui label" v-for="language in match.languages">
-                <i class="flag" v-bind:class="language"></i> {{ language | toUpperCase }}
+                <i class="flag" v-bind:class="language"></i> {{ language | toUpperCase | countryToLang }}
             </a>
         </td>
         <td>
@@ -43,5 +43,11 @@
         open(match.invitationLink, "", "width=450,height=500")
       }
     },
+
+    filters: {
+      countryToLang: function (language) {
+        return language.replace('GB', 'EN'); // More to come!
+      }
+    }
   }
 </script>

@@ -8,7 +8,11 @@ Echo = new Echo({
     namespace: 'OverPugs.Events'
 });
 
-Raven.config(OverPugs.sentry_dsn).addPlugin(RavenVue, Vue).install();
+Raven.config(OverPugs.sentry_dsn, {
+  shouldSendCallback: function () {
+    return OverPugs.production;
+  }
+}).addPlugin(RavenVue, Vue).install();
 
 Vue.use(Vuex);
 Vue.use(VueResource);

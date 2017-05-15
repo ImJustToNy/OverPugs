@@ -14,6 +14,7 @@
                 'sentry_dsn' => env('SENTRY_PUBLIC_DSN'),
                 'pusherKey' => config('broadcasting.connections.pusher.key'),
                 'languages' => trans('languages'),
+                'production' => !App::environment('local'),
                 'user' => $user,
                 'askedMatch' => session('match')
             ]) !!}
