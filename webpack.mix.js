@@ -21,6 +21,9 @@ mix
         uglify: {
           compress: {
             drop_console: false
+          },
+          output: {
+            comments: false
           }
         }
     })
