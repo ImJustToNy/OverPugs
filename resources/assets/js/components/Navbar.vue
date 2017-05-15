@@ -5,7 +5,7 @@
         <img class="logo" src="/images/logo.png" width="128">
         OverPugs
         <div class="ui left pointing red basic label">
-          by <a href="mailto:imtony@protonmail.com">ToNy</a>
+          Made with <i class="icon red heart nomargin"></i> by <a href="mailto:imtony@protonmail.com">ToNy</a>
         </div>
       </div>
       <div class="right green menu">
