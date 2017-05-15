@@ -17,8 +17,9 @@ Vue.component('layout', require('./components/Layout'));
 Vue.component('loading', require('./components/Loading'));
 Vue.component('add', require('./components/Add'));
 Vue.component('navbar', require('./components/Navbar'));
-Vue.component('gamelist', require('./components/Gamelist'));
 Vue.component('game', require('./components/Game'));
+Vue.component('gamelist', require('./components/GameList'));
+Vue.component('gamemodal', require('./components/GameModal'));
 Vue.component('adsense', require('./components/AdSense'));
 
 Vue.filter('imageRank', function (value) {

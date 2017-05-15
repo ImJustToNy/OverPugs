@@ -52,37 +52,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="game in matches" v-show="game.region == region" v-bind:class="{ warning: user && (game.user.tag == user.tag) }" v-if="check(game)">
-          <td>
-            <img class="ui avatar image" v-bind:src="game.user.avatar_url">{{ game.user.tag | friendlyTag }}
-          </td>
-          <td>
-            <a class="ui mini label" v-bind:class="game.type | badge('color')">{{ game.type | badge('name') }}</a>
-          </td>
-          <td v-if="game.type == 'comp'">
-            <img v-bind:src="game.minRank | imageRank" alt="User's rank" width="16"> <b>{{ game.minRank }}</b>
-            -
-            <img v-bind:src="game.maxRank | imageRank" alt="User's rank" width="16"> <b>{{ game.maxRank }}</b>
-          </td>
-          <td v-else>
-            {{ game.description }}
-          </td>
-          <td>
-            <a class="ui label" v-for="language in game.languages"><i class="flag" v-bind:class="language"></i> {{ language | toUpperCase }}</a>
-          </td>
-          <td>
-            <i class="icon user"></i>
-            {{ game.howMuch | pluralize('player') }}
-          </td>
-          <td>
-            <div class="ui circular button icon" v-on:click="openDiscord(game)" v-if="game.invitationLink" data-tooltip="Connect to discord">
-              <img src="/images/discord.png" alt="Discord logo" class="icon">
-            </div>
-            <div class="ui circular button icon copier" v-bind:data-clipboard-text="game.user.tag" data-tooltip="Copy Battle.net tag">
-              <img src="/images/bnet.png" alt="Battle.net logo" class="icon">
-            </div>
-          </td>
-        </tr>
+        <game v-for="game in matches" v-show="game.region == region" v-bind:class="{ warning: user && (game.user.tag == user.tag) }" v-if="check(game)" v-bind:match="game"></game>
       </tbody>
     </table>
     <div v-show="!matches.length">
