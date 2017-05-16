@@ -26,7 +26,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Download all nessesary informations about specific battlenet profile
+     * Download all nessesary informations about specific battlenet profile.
      *
      * @return void
      */

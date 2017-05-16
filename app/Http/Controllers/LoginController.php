@@ -11,8 +11,7 @@ use Laravel\Socialite\Facades\Socialite;
 use OverPugs\User;
 
 /**
- * Class LoginController
- * @package OverPugs\Http\Controllers
+ * Class LoginController.
  */
 class LoginController extends Controller
 {
@@ -112,6 +111,7 @@ class LoginController extends Controller
      * and login the user.
      *
      * @param Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function endpointDiscord(Request $request)

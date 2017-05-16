@@ -39,7 +39,7 @@ class MatchController extends Controller
         if (Carbon::now()->diffInSeconds(new Carbon($match->expireAt)) > 180) {
             return response()->json([
                'status' => 'too fast',
-               'match' => $match
+               'match'  => $match
             ]);
         }
 
@@ -55,7 +55,7 @@ class MatchController extends Controller
 
         return response()->json([
             'status' => 'ok',
-            'match' => $userMatch
+            'match'  => $userMatch
         ]);
     }
 
@@ -129,7 +129,7 @@ class MatchController extends Controller
         }
 
         $match = new Match();
-        $censor = new CensorWords;
+        $censor = new CensorWords();
 
         $match->type = $request->type;
         $match->description = $censor->censorString($request->description)['clean'];

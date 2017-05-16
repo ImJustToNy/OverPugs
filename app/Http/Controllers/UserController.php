@@ -17,6 +17,7 @@ class UserController extends Controller
      * Push new prefered_region to user's database.
      *
      * @param Request $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function changeRegion(Request $request)
@@ -37,9 +38,10 @@ class UserController extends Controller
     }
 
     /**
-     * Trigger getProfile method on logged user
+     * Trigger getProfile method on logged user.
      *
      * @param Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function refreshProfile(Request $request)
@@ -47,7 +49,7 @@ class UserController extends Controller
         Auth::user()->getProfile();
 
         return response()->json([
-            'rank' => Auth::user()->rank,
+            'rank'       => Auth::user()->rank,
             'avatar_url' => Auth::user()->avatar_url
         ]);
     }
