@@ -1,5 +1,12 @@
 <template>
   <div>
+    <adsense
+            ad-client="ca-pub-1871612708734823"
+            ad-slot="2535335992"
+            ad-style="display: block"
+            ad-format="auto">
+    </adsense>
+
     <table class="ui table center aligned" v-show="matches.length">
       <thead>
         <tr>

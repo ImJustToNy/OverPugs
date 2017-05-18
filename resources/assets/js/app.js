@@ -24,7 +24,7 @@ Vue.component('navbar', require('./components/Navbar'));
 Vue.component('game', require('./components/Game'));
 Vue.component('gamelist', require('./components/GameList'));
 Vue.component('gamemodal', require('./components/GameModal'));
-Vue.component('adsense', require('./components/AdSense'));
+Vue.component('adsense', VueAdsense);
 
 Vue.filter('imageRank', function (value) {
     var imageId;

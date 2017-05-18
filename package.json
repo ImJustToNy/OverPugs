@@ -17,6 +17,7 @@
     "raven-js": "^3.13.1",
     "semantic-ui-css": "^2.2.9",
     "vue": "^2.1.10",
+    "vue-adsense": "https://github.com/michael158/vue-adsense",
     "vue-resource": "^1.2.1",
     "vuex": "^2.2.1"
   }

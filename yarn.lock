@@ -4497,6 +4497,14 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-adsense@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/vue-adsense/-/vue-adsense-1.0.1.tgz#6626772627071f9d7449b2558547a34ceca42c1f"
+
+"vue-adsense@https://github.com/michael158/vue-adsense":
+  version "1.0.1"
+  resolved "https://github.com/michael158/vue-adsense#da3b406e412525bf2f2adb60e329203f1a1ad96a"
+
 vue-hot-reload-api@^2.0.1:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.1.0.tgz#9ca58a6e0df9078554ce1708688b6578754d86de"

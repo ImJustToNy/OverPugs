@@ -21,3 +21,5 @@ window.Pusher = require('pusher-js');
 window.Raven = require('raven-js');
 
 window.RavenVue = require('raven-js/plugins/vue');
+
+window.VueAdsense = require('vue-adsense').default;
