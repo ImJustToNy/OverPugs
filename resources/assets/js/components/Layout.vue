@@ -6,7 +6,7 @@
 
     <gamelist></gamelist>
 
-    <game></game>
+    <gamemodal></gamemodal>
 
     <add></add>
   </div>
