@@ -69,6 +69,8 @@
       </h2>
     </div>
 
+
+
     <adsense
             ad-client="ca-pub-1871612708734823"
             ad-slot="1512601197"

@@ -5,9 +5,13 @@
         <img class="logo" src="/images/logo.png" width="128">
         OverPugs
         <div class="ui left pointing red basic label">
-          Made with <i class="icon red heart nomargin"></i> by <a href="mailto:imtony@protonmail.com">ToNy</a>
+          Made by <a href="http://tonydev.me">ToNy</a>
         </div>
       </div>
+      <a href="https://goo.gl/forms/vgdo0R20Z2oUBl8A3" class="item">
+        <i class="write square icon"></i>
+        Leave feedback
+      </a>
       <div class="right green menu">
         <div class="ui dropdown item">
           <i class="flag" v-bind:class="region"></i> {{ region | toUpperCase }} <i class="dropdown icon"></i>
