@@ -60,6 +60,10 @@ class User extends Authenticatable
             }
         }
 
+        if (empty($played)) {
+            die('Looks like no overwatch profiles were found for this battle.net account. If you believe that\'s an error, please report this.');
+        }
+
         $newest_region = array_search(max($played), $played);
 
         $this->avatar_url = $portrait[$newest_region];
