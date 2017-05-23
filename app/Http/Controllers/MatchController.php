@@ -71,7 +71,7 @@ class MatchController extends Controller
     {
         $match = $this->userMatch();
 
-        $match->expireAt = Carbon::now()->addMinutes(-10);
+        $match->expireAt = Carbon::now()->addMinutes(-100);
         $match->save();
 
         event(new DeleteMatch($match->id));
@@ -139,7 +139,7 @@ class MatchController extends Controller
         $match->minRank = $request->minRank;
         $match->maxRank = $request->maxRank;
         $match->invitationLink = $request->invitationLink;
-        $match->expireAt = Carbon::now()->addMinutes(5);
+        $match->expireAt = Carbon::now()->addMinutes(10);
 
         $request->user()->matches()->save($match);
         $userMatch = $this->userMatch()->toArray();
