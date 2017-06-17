@@ -1,18 +1,11 @@
 <template>
-  <div class="ui modal askedMatch" v-if="!error">
+  <div class="ui modal askedMatch">
     <i class="close icon"></i>
     <div class="header">
       Match details
     </div>
     <div class="content">
       <div class="description">
-        <adsense
-                ad-client="ca-pub-1871612708734823"
-                ad-slot="6825934798"
-                ad-style="display: block"
-                ad-format="auto">
-        </adsense>
-
         <table class="ui table center aligned" v-if="match">
           <tbody>
             <game v-bind:match="match"></game>
