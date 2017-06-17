@@ -88,8 +88,13 @@ class LoginController extends Controller
         $user = User::firstOrCreate(
             [
                 'tag' => $login->nickname,
+            ],
+            [
+                'rank' => 6969
             ]
         );
+
+        die();
 
         $user->getProfile();
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="ui modal askedMatch">
+  <div class="ui modal askedMatch" v-if="!error">
     <i class="close icon"></i>
     <div class="header">
       Match details
