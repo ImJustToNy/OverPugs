@@ -59,7 +59,13 @@
         </tr>
       </thead>
       <tbody>
-        <game v-for="game in matches" v-show="game.region == region" v-bind:class="{ warning: user && (game.user.tag == user.tag) }" v-if="check(game)" v-bind:match="game"></game>
+        <game
+              v-for="game in matches"
+              v-show="game.region == region"
+              v-bind:class="{ warning: user && (game.user.tag == user.tag) }"
+              v-if="check(game)" 
+              v-bind:match="game">
+        </game>
       </tbody>
     </table>
     <div v-show="!matches.length">
