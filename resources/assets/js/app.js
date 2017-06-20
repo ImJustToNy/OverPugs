@@ -52,10 +52,6 @@ Vue.filter('toUpperCase', function (value) {
     return value.toUpperCase();
 });
 
-Vue.filter('toLowerCase', function (value) {
-    return value.toLowerCase();
-});
-
 Vue.filter('friendlyTag', function (value) {
     return value.substr(0, value.indexOf('#'));
 });
