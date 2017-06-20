@@ -198,7 +198,7 @@
           return false;
         }
 
-        if (this.filter.discord != 'not' && (!game.invitationLink ? false : true) != (this.filter.discord == 'true' ? true : false)) {
+        if (this.filter.discord != 'not' && !game.invitationLink == (this.filter.discord == 'true')) {
           return false;
         }
 
