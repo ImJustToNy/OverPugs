@@ -133,8 +133,6 @@ new Vue({
                 state.region = condition;
 
                 if (state.user) {
-                    state.profile = state.user[condition + '_profile'];
-
                     Vue.http.post('changeRegion', {
                         'region': condition
                     });
